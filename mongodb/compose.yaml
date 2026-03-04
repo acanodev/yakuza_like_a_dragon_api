@@ -1,0 +1,12 @@
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: yakuza_like_a_dragon_mongo
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - yakuza-like-a-dragon-data:/data/db
+    restart: unless-stopped
+
+volumes:
+  yakuza-like-a-dragon-data:
