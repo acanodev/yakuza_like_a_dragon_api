@@ -61,16 +61,32 @@ app.post("/api/main_characters", async (request, response, next) => {
   const mc = request.body;
 
   const newMC = new mainCharacter({
-    name: mc.name,
-    id_num: mc.id_num,
+    name: String(mc.name),
+    id_num: Number(mc.id_num),
     jobs: mc.jobs.split(","),
-    image: mc.image ?? null,
-    description: mc.description ?? null,
+    image: String(mc.image) ?? null,
+    description: String(mc.description) ?? null,
   });
 
   try {
     await newMC.save();
     response.json(newMC);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.delete("/api/main_characters/:id", async (request, response, next) => {
+  const id = request.params.id;
+
+  try {
+    if (!isNaN(id)) {
+      await mainCharacter.findOneAndDelete({ id_num: Number(id) });
+    } else {
+      await mainCharacter.findByIdAndDelete(id);
+    }
+
+    response.status(204).end();
   } catch (error) {
     next(error);
   }
