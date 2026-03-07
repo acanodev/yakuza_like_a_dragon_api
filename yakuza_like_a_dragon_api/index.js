@@ -55,6 +55,26 @@ app.get('/api/main_characters/:id', async (request, response, next) => {
     }
 });
 
+app.post("/api/main_characters", async (request, response, next) => {
+
+  const mc = request.body;
+
+  const newMC = new mainCharacter({
+    name: mc.name,
+    id_num: mc.id_num,
+    jobs: mc.jobs.split(","),
+    image: mc.image ?? null,
+    description: mc.description ?? null,
+  });
+
+  try {
+    await newMC.save();
+    response.json(newMC);
+  } catch (error) {
+    next(error);
+  }
+});
+
 /*====SUJIMON ENDPOINTS====*/
 
 
