@@ -39,6 +39,21 @@ app.get('/api/main_characters', async (request, response, next) => {
     }
 });
 
+app.get('/api/main_characters/:id', async (request, response, next) => {
+    try {
+
+        let mc;
+
+        if (typeof request.id === 'number') {
+            mc = await mainCharacter.find(el => el.id_num === request.id);
+        } else {
+            mc = await mainCharacter.findById(request.id);
+        }
+        response.json(mc);
+    } catch (error) {
+        next(error);
+    }
+});
 
 /*====SUJIMON ENDPOINTS====*/
 
