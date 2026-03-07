@@ -30,33 +30,34 @@ app.use(express.json());
 app.use(express.static("public"));
 
 /*====MAIN CHARACTERS ENDPOINTS====*/
-app.get('/api/main_characters', async (request, response, next) => {
-    try {
-        const mcs = await mainCharacter.find({});
-        response.json(mcs);
-    } catch (error) {
-        next(error);
-    }
+app.get("/api/main_characters", async (request, response, next) => {
+  try {
+    const mcs = await mainCharacter.find({});
+    response.json(mcs);
+  } catch (error) {
+    next(error);
+  }
 });
 
-app.get('/api/main_characters/:id', async (request, response, next) => {
-    try {
+app.get("/api/main_characters/:id", async (request, response, next) => {
+  try {
+    const id = request.params.id;
 
-        let mc;
+    let mc;
 
-        if (typeof request.id === 'number') {
-            mc = await mainCharacter.find(el => el.id_num === request.id);
-        } else {
-            mc = await mainCharacter.findById(request.id);
-        }
-        response.json(mc);
-    } catch (error) {
-        next(error);
+    if (!isNaN(id)) {
+      mc = await mainCharacter.findOne({ id_num: Number(id) });
+    } else {
+      mc = await mainCharacter.findById(id);
     }
+
+    response.json(mc);
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.post("/api/main_characters", async (request, response, next) => {
-
   const mc = request.body;
 
   const newMC = new mainCharacter({
@@ -77,9 +78,8 @@ app.post("/api/main_characters", async (request, response, next) => {
 
 /*====SUJIMON ENDPOINTS====*/
 
-
-app.use(handleErrors)
+app.use(handleErrors);
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
