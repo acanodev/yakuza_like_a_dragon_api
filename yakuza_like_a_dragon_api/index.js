@@ -63,7 +63,7 @@ app.post("/api/main_characters", async (request, response, next) => {
   const newMC = new mainCharacter({
     name: String(mc.name),
     id_num: Number(mc.id_num),
-    jobs: mc.jobs.split(","),
+    jobs: mc.jobs ? mc.jobs.split(",") : [],
     image: String(mc.image) ?? null,
     description: String(mc.description) ?? null,
   });
@@ -71,6 +71,39 @@ app.post("/api/main_characters", async (request, response, next) => {
   try {
     await newMC.save();
     response.json(newMC);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.put("/api/main_characters/:id", async (request, response, next) => {
+  const id = request.params.id;
+  const mc = request.body;
+
+  const updatedData = {
+    name: mc.name,
+    id_num: mc.id_num,
+    jobs: mc.jobs ? mc.jobs.split(",") : [],
+    image: mc.image ?? null,
+    description: mc.description ?? null,
+  };
+
+  try {
+    let updated;
+
+    if (!isNaN(id)) {
+      updated = await mainCharacter.findOneAndUpdate(
+        { id_num: Number(id) },
+        updatedData,
+        { new: true },
+      );
+    } else {
+      updated = await mainCharacter.findByIdAndUpdate(id, updatedData, {
+        new: true,
+      });
+    }
+
+    response.json(updated);
   } catch (error) {
     next(error);
   }
