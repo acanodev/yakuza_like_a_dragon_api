@@ -6,6 +6,11 @@ const mainCharacterSchema = new Schema({
         type: String,
         required: true
     },
+    id_num:
+    {
+        type: Number,
+        required: true
+    },
     jobs:
     {
         type: [String],

@@ -6,6 +6,11 @@ const sujimonSchema = new Schema({
         type: String,
         required: true
     },
+    id_num:
+    {
+        type: Number,
+        required: true
+    },
     common_locations:
     {
         type: [String],
