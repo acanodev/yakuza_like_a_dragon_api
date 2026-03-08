@@ -8,6 +8,7 @@ const cors = require("cors");
 const mainCharacter = require("./models/Main_Character");
 const Sujimon = require("./models/Sujimon");
 const handleErrors = require("./middlewares/handleErrors");
+const notFound = require("./middlewares/notFound");
 
 app.use(
   cors({
@@ -51,7 +52,7 @@ app.get("/api/main_characters/:id", async (request, response, next) => {
       mc = await mainCharacter.findById(id);
     }
 
-    response.json(mc);
+    mc ? response.json(mc) : next();
   } catch (error) {
     next(error);
   }
@@ -103,7 +104,7 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
       });
     }
 
-    response.json(updated);
+    update ? response.json(updated) : next();
   } catch (error) {
     next(error);
   }
@@ -111,15 +112,16 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
 
 app.delete("/api/main_characters/:id", async (request, response, next) => {
   const id = request.params.id;
+  let result;
 
   try {
     if (!isNaN(id)) {
-      await mainCharacter.findOneAndDelete({ id_num: Number(id) });
+      result = await mainCharacter.findOneAndDelete({ id_num: Number(id) });
     } else {
-      await mainCharacter.findByIdAndDelete(id);
+      result = await mainCharacter.findByIdAndDelete(id);
     }
 
-    response.status(204).end();
+    result ? response.status(204).end() : next();
   } catch (error) {
     next(error);
   }
@@ -148,7 +150,7 @@ app.get("/api/sujimon/:id", async (request, response, next) => {
       sujimon = await Sujimon.findById(id);
     }
 
-    response.json(sujimon);
+    sujimon ? response.json(sujimon) : next();
   } catch (error) {
     next(error);
   }
@@ -216,7 +218,7 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
       });
     }
 
-    response.json(updated);
+    updated ? response.json(updated) : next();
   } catch (error) {
     next(error);
   }
@@ -224,21 +226,23 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
 
 app.delete("/api/sujimon/:id", async (request, response, next) => {
   const id = request.params.id;
+  let result;
 
   try {
     if (!isNaN(id)) {
-      await Sujimon.findOneAndDelete({ id_num: Number(id) });
+      result = await Sujimon.findOneAndDelete({ id_num: Number(id) });
     } else {
-      await Sujimon.findByIdAndDelete(id);
+      result = await Sujimon.findByIdAndDelete(id);
     }
 
-    response.status(204).end();
+    result ? response.status(204).end() : next();
   } catch (error) {
     next(error);
   }
 });
 
 app.use(handleErrors);
+app.use(notFound);
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
