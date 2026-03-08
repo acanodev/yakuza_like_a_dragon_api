@@ -9,6 +9,8 @@ const mainCharacter = require("./models/Main_Character");
 const Sujimon = require("./models/Sujimon");
 const handleErrors = require("./middlewares/handleErrors");
 const notFound = require("./middlewares/notFound");
+const validateMainCharacter = require("./validators/validateMainCharacter");
+const validateSujimon = require("./validators/validateSujimon");
 
 app.use(
   cors({
@@ -61,6 +63,15 @@ app.get("/api/main_characters/:id", async (request, response, next) => {
 app.post("/api/main_characters", async (request, response, next) => {
   const mc = request.body;
 
+  const error = validateMainCharacter(mc);
+
+  if (error) {
+    return response.status(400).json({
+      success: false,
+      message: error
+    })
+  }
+
   const newMC = new mainCharacter({
     name: String(mc.name),
     id_num: Number(mc.id_num),
@@ -80,6 +91,15 @@ app.post("/api/main_characters", async (request, response, next) => {
 app.put("/api/main_characters/:id", async (request, response, next) => {
   const id = request.params.id;
   const mc = request.body;
+
+  const error = validateMainCharacter(mc);
+
+  if (error) {
+    return response.status(400).json({
+      success: false,
+      message: error
+    })
+  }
 
   const updatedData = {
     name: String(mc.name),
@@ -159,6 +179,15 @@ app.get("/api/sujimon/:id", async (request, response, next) => {
 app.post("/api/sujimon", async (request, response, next) => {
   const sujimon = request.body;
 
+  const error = validateSujimon(sujimon);
+
+  if (error) {
+    return response.status(400).json({
+      status: false,
+      message: error,
+    });
+  }
+
   const newSujimon = new Sujimon({
     name: String(sujimon.name),
     id_num: Number(sujimon.id_num),
@@ -186,6 +215,15 @@ app.post("/api/sujimon", async (request, response, next) => {
 app.put("/api/sujimon/:id", async (request, response, next) => {
   const id = request.params.id;
   const sujimon = request.body;
+
+  const error = validateSujimon(sujimon);
+
+  if (error) {
+    return response.status(400).json({
+      status: false,
+      message: error,
+    });
+  }
 
   const updatedData = {
     name: String(sujimon.name),
