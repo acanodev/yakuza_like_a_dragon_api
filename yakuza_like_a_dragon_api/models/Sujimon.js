@@ -11,6 +11,11 @@ const sujimonSchema = new Schema({
         type: Number,
         required: true
     },
+    category: 
+    {
+        type: String,
+        required: true
+    },
     common_locations:
     {
         type: [String],
@@ -21,7 +26,17 @@ const sujimonSchema = new Schema({
         type: Number,
         required: true
     },
+    skills: 
+    {
+        type: [String],
+        required: true
+    },
     weaknesses:
+    {
+        type: [String],
+        required: true
+    },
+    drops:
     {
         type: [String],
         required: true

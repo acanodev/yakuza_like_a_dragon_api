@@ -64,8 +64,8 @@ app.post("/api/main_characters", async (request, response, next) => {
     name: String(mc.name),
     id_num: Number(mc.id_num),
     jobs: mc.jobs ? mc.jobs.split(",") : [],
-    image: String(mc.image) ?? null,
-    description: String(mc.description) ?? null,
+    image: mc.image !== undefined ? String(mc.image) : null,
+    description: mc.description !== undefined ? String(mc.description) : null,
   });
 
   try {
@@ -81,11 +81,11 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
   const mc = request.body;
 
   const updatedData = {
-    name: mc.name,
-    id_num: mc.id_num,
+    name: String(mc.name),
+    id_num: Number(mc.id_num),
     jobs: mc.jobs ? mc.jobs.split(",") : [],
-    image: mc.image ?? null,
-    description: mc.description ?? null,
+    image: mc.image !== undefined ? String(mc.image) : null,
+    description: mc.description !== undefined ? String(mc.description) : null,
   };
 
   try {
@@ -160,13 +160,17 @@ app.post("/api/sujimon", async (request, response, next) => {
   const newSujimon = new Sujimon({
     name: String(sujimon.name),
     id_num: Number(sujimon.id_num),
+    category: String(sujimon.category),
     common_locations: sujimon.common_locations
       ? sujimon.common_locations.split(",")
       : [],
     rarity: Number(sujimon.rarity),
+    skills: sujimon.skills ? sujimon.skills.split(",") : [],
     weaknesses: sujimon.weaknesses ? sujimon.weaknesses.split(",") : [],
-    image: String(sujimon.image) ?? null,
-    description: String(sujimon.description) ?? null,
+    drops: sujimon.drops ? sujimon.drops.split(",") : [],
+    image: sujimon.image !== undefined ? String(sujimon.image) : null,
+    description:
+      sujimon.description !== undefined ? String(sujimon.description) : null,
   });
 
   try {
@@ -184,13 +188,17 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
   const updatedData = {
     name: String(sujimon.name),
     id_num: Number(sujimon.id_num),
+    category: String(sujimon.category),
     common_locations: sujimon.common_locations
       ? sujimon.common_locations.split(",")
       : [],
     rarity: Number(sujimon.rarity),
+    skills: sujimon.skills ? sujimon.skills.split(",") : [],
     weaknesses: sujimon.weaknesses ? sujimon.weaknesses.split(",") : [],
-    image: String(sujimon.image) ?? null,
-    description: String(sujimon.description) ?? null,
+    drops: sujimon.drops ? sujimon.drops.split(",") : [],
+    image: sujimon.image !== undefined ? String(sujimon.image) : null,
+    description:
+      sujimon.description !== undefined ? String(sujimon.description) : null,
   };
 
   try {
