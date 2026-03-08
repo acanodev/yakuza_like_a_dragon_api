@@ -4,6 +4,7 @@ require("./mongo");
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const helmet = require("helmet"); // MIDDLEWARE DE SEGURETAT
 
 const mainCharacter = require("./models/Main_Character");
 const Sujimon = require("./models/Sujimon");
@@ -11,6 +12,18 @@ const handleErrors = require("./middlewares/handleErrors");
 const notFound = require("./middlewares/notFound");
 const validateMainCharacter = require("./validators/validateMainCharacter");
 const validateSujimon = require("./validators/validateSujimon");
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsdoc = require("swagger-jsdoc");
+
+/*
+
+Helmet és un middleware de seguretat que afegeix capceleres de
+seguretat automàticament i serveix principalment per a protegir l'API de vulnerabilitats comuns
+dels navegadors web.
+
+*/
+app.use(helmet());
 
 app.use(
   cors({
@@ -28,9 +41,6 @@ app.use(
   }),
 );
 app.use(express.json());
-
-// API DOCS
-app.use(express.static("public"));
 
 /*====MAIN CHARACTERS ENDPOINTS====*/
 app.get("/api/main_characters", async (request, response, next) => {
