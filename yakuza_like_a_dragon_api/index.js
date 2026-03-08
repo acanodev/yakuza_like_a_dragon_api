@@ -6,7 +6,7 @@ const app = express();
 const cors = require("cors");
 
 const mainCharacter = require("./models/Main_Character");
-const sujimon = require("./models/Sujimon");
+const Sujimon = require("./models/Sujimon");
 const handleErrors = require("./middlewares/handleErrors");
 
 app.use(
@@ -126,6 +126,109 @@ app.delete("/api/main_characters/:id", async (request, response, next) => {
 });
 
 /*====SUJIMON ENDPOINTS====*/
+app.get("/api/sujimon", async (request, response, next) => {
+  try {
+    let sujimon = await Sujimon.find({});
+    sujimon = sujimon.sort((a, b) => a.id_num - b.id_num);
+    response.json(sujimon);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get("/api/sujimon/:id", async (request, response, next) => {
+  try {
+    const id = request.params.id;
+
+    let sujimon;
+
+    if (!isNaN(id)) {
+      sujimon = await Sujimon.findOne({ id_num: Number(id) });
+    } else {
+      sujimon = await Sujimon.findById(id);
+    }
+
+    response.json(sujimon);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.post("/api/sujimon", async (request, response, next) => {
+  const sujimon = request.body;
+
+  const newSujimon = new Sujimon({
+    name: String(sujimon.name),
+    id_num: Number(sujimon.id_num),
+    common_locations: sujimon.common_locations
+      ? sujimon.common_locations.split(",")
+      : [],
+    rarity: Number(sujimon.rarity),
+    weaknesses: sujimon.weaknesses ? sujimon.weaknesses.split(",") : [],
+    image: String(sujimon.image) ?? null,
+    description: String(sujimon.description) ?? null,
+  });
+
+  try {
+    await newSujimon.save();
+    response.json(newSujimon);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.put("/api/sujimon/:id", async (request, response, next) => {
+  const id = request.params.id;
+  const sujimon = request.body;
+
+  const updatedData = {
+    name: String(sujimon.name),
+    id_num: Number(sujimon.id_num),
+    common_locations: sujimon.common_locations
+      ? sujimon.common_locations.split(",")
+      : [],
+    rarity: Number(sujimon.rarity),
+    weaknesses: sujimon.weaknesses ? sujimon.weaknesses.split(",") : [],
+    image: String(sujimon.image) ?? null,
+    description: String(sujimon.description) ?? null,
+  };
+
+  try {
+    let updated;
+
+    if (!isNaN(id)) {
+      updated = await Sujimon.findOneAndUpdate(
+        { id_num: Number(id) },
+        updatedData,
+        { new: true },
+      );
+    } else {
+      updated = await Sujimon.findByIdAndUpdate(id, updatedData, {
+        new: true,
+      });
+    }
+
+    response.json(updated);
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.delete("/api/sujimon/:id", async (request, response, next) => {
+  const id = request.params.id;
+
+  try {
+    if (!isNaN(id)) {
+      await Sujimon.findOneAndDelete({ id_num: Number(id) });
+    } else {
+      await Sujimon.findByIdAndDelete(id);
+    }
+
+    response.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+});
 
 app.use(handleErrors);
 const PORT = process.env.PORT || 3001;
