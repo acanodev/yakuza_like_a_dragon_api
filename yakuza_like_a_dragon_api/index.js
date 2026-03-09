@@ -42,16 +42,70 @@ app.use(
 );
 app.use(express.json());
 
+// API-DOCS
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Yakuza Like a Dragon API",
+      version: "1.0.0",
+    },
+    tags: [
+      {
+        name: "Main Characters",
+        description: "Endpoints related to main characters"
+      },
+      {
+        name: "Sujimon",
+        description: "Endpoints related to sujimon"
+      }
+    ]
+  },
+  apis: ["./index.js"],
+};
+
+const swaggerSpec = swaggerJsdoc(options);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 /*====MAIN CHARACTERS ENDPOINTS====*/
+
+/**
+ * @swagger
+ * /api/main_characters:
+ *   get:
+ *     tags: [Main Characters]
+ *     summary: Get all main characters
+ *     responses:
+ *       200:
+ *         description: List of characters
+ */
 app.get("/api/main_characters", async (request, response, next) => {
   try {
     const mcs = await mainCharacter.find({});
-    response.json(mcs);
+    response.status(200).json(mcs);
   } catch (error) {
     next(error);
   }
 });
 
+/**
+ * @swagger
+ * /api/main_characters/{id}:
+ *   get:
+ *     tags: [Main Characters]
+ *     summary: Get a main character by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Character ID (MongoID or id_num)
+ *     responses:
+ *       200:
+ *         description: Character found
+ *       404:
+ *         description: Character not found
+ */
 app.get("/api/main_characters/:id", async (request, response, next) => {
   try {
     const id = request.params.id;
@@ -64,12 +118,42 @@ app.get("/api/main_characters/:id", async (request, response, next) => {
       mc = await mainCharacter.findById(id);
     }
 
-    mc ? response.json(mc) : next();
+    mc ? response.status(200).json(mc) : next();
   } catch (error) {
     next(error);
   }
 });
 
+/**
+ * @swagger
+ * /api/main_characters:
+ *   post:
+ *     tags: [Main Characters]
+ *     summary: Creates a main character
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               id_num:
+ *                 type: integer
+ *                 default: 1
+ *               jobs:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Character created
+ *       400:
+ *         description: Bad request
+ */
 app.post("/api/main_characters", async (request, response, next) => {
   const mc = request.body;
 
@@ -78,8 +162,8 @@ app.post("/api/main_characters", async (request, response, next) => {
   if (error) {
     return response.status(400).json({
       success: false,
-      message: error
-    })
+      message: error,
+    });
   }
 
   const newMC = new mainCharacter({
@@ -98,6 +182,43 @@ app.post("/api/main_characters", async (request, response, next) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/main_characters/{id}:
+ *   put:
+ *     tags: [Main Characters]
+ *     summary: Updates an existing main character
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Character ID (MongoID or id_num)
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               id_num:
+ *                 type: integer
+ *                 default: 1
+ *               jobs:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Character found
+ *       404:
+ *         description: Character not found
+ *       400:
+ *         description: Bad request
+ */
 app.put("/api/main_characters/:id", async (request, response, next) => {
   const id = request.params.id;
   const mc = request.body;
@@ -107,8 +228,8 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
   if (error) {
     return response.status(400).json({
       success: false,
-      message: error
-    })
+      message: error,
+    });
   }
 
   const updatedData = {
@@ -140,6 +261,25 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/main_characters/{id}:
+ *  delete:
+ *    tags: [Main Characters]
+ *    summary: Deletes a main character.
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Character ID (MongoID or id_num)
+ *         schema:
+ *           type: string
+ *    responses:
+ *      204:
+ *        description: No content. Main character deleted successfully!
+ *      404:
+ *        description: Main character not found
+ */
 app.delete("/api/main_characters/:id", async (request, response, next) => {
   const id = request.params.id;
   let result;
@@ -158,6 +298,17 @@ app.delete("/api/main_characters/:id", async (request, response, next) => {
 });
 
 /*====SUJIMON ENDPOINTS====*/
+
+/**
+ * @swagger
+ * /api/sujimon:
+ *   get:
+ *     tags: [Sujimon]
+ *     summary: Get all sujimon
+ *     responses:
+ *       200:
+ *         description: List of sujimon
+ */
 app.get("/api/sujimon", async (request, response, next) => {
   try {
     let sujimon = await Sujimon.find({});
@@ -168,6 +319,23 @@ app.get("/api/sujimon", async (request, response, next) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/sujimon/{id}:
+ *   get:
+ *     tags: [Sujimon]
+ *     summary: Get a sujimon by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Sujimon ID (MongoID or id_num)
+ *     responses:
+ *       200:
+ *         description: Sujimon found
+ *       404:
+ *         description: Sujimon not found
+ */
 app.get("/api/sujimon/:id", async (request, response, next) => {
   try {
     const id = request.params.id;
@@ -186,6 +354,47 @@ app.get("/api/sujimon/:id", async (request, response, next) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/sujimon:
+ *   post:
+ *     tags: [Sujimon]
+ *     summary: Creates a sujimon
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               id_num:
+ *                 type: integer
+ *                 default: 1
+ *               category:
+ *                 type: string
+ *               common_locations:
+ *                 type: string
+ *               rarity:
+ *                 type: integer
+ *                 default: 1
+ *               skills:
+ *                 type: string
+ *               weaknesses:
+ *                 type: string
+ *               drops:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Character created
+ *       400:
+ *         description: Bad request
+ */
 app.post("/api/sujimon", async (request, response, next) => {
   const sujimon = request.body;
 
@@ -222,6 +431,54 @@ app.post("/api/sujimon", async (request, response, next) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/sujimon/{id}:
+ *   put:
+ *     tags: [Sujimon]
+ *     summary: Updates an existing sujimon
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Sujimon ID (MongoID or id_num)
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               id_num:
+ *                 type: integer
+ *                 default: 1
+ *               category:
+ *                 type: string
+ *               common_locations:
+ *                 type: string
+ *               rarity:
+ *                 type: integer
+ *                 default: 1
+ *               skills:
+ *                 type: string
+ *               weaknesses:
+ *                 type: string
+ *               drops:
+ *                 type: string
+ *               image:
+ *                 type: string
+ *               description:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Sujimon found
+ *       404:
+ *         description: Sujimon not found
+ *       400:
+ *         description: Bad request
+ */
 app.put("/api/sujimon/:id", async (request, response, next) => {
   const id = request.params.id;
   const sujimon = request.body;
@@ -272,6 +529,25 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
   }
 });
 
+/**
+ * @swagger
+ * /api/sujimon/{id}:
+ *  delete:
+ *    tags: [Sujimon]
+ *    summary: Deletes a sujimon.
+ *    parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Sujimon ID (MongoID or id_num)
+ *         schema:
+ *           type: string
+ *    responses:
+ *      204:
+ *        description: No content. Sujimon deleted successfully!
+ *      404:
+ *        description: Sujimon not found
+ */
 app.delete("/api/sujimon/:id", async (request, response, next) => {
   const id = request.params.id;
   let result;
