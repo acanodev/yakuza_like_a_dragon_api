@@ -68,6 +68,18 @@ const swaggerSpec = swaggerJsdoc(options);
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+app.get("/", (req, res) => {
+  res.json({
+    name: "Yakuza Like a Dragon API",
+    version: "1.0.0",
+    documentation: `${process.env.HOST}:${process.env.PORT}/api-docs`,
+    endpoints: {
+      mainCharacters: `${process.env.HOST}:${process.env.PORT}/api/main_characters`,
+      sujimon: `${process.env.HOST}:${process.env.PORT}/api/sujimon`
+    }
+  });
+});
+
 /*====MAIN CHARACTERS ENDPOINTS====*/
 
 /**
