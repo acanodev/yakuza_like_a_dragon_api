@@ -10,6 +10,9 @@
 
 body {
     font-family: Noto-Sans-Display, sans-serif;
+    background-image: url(assets/background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 h1, h2, h3, h4, h5, h6, button {
