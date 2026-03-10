@@ -17,7 +17,7 @@ export type NewMainCharacter = {
 
 export type MainCharacterFormProps = {
   newContent: NewMainCharacter;
-  editingNote: MainCharacter | null;
+  editingMainCharacter: MainCharacter | null;
   onChange: (content: NewMainCharacter) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
