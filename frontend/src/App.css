@@ -1,0 +1,17 @@
+@font-face {
+    font-family: Noto-Sans-Display;
+    src: url(fonts/Noto_Sans_Display/NotoSansDisplay-VariableFont_wdth\,wght.ttf);
+}
+
+@font-face {
+    font-family: Edo;
+    src: url(fonts/edo_sz/edosz.ttf);
+}
+
+body {
+    font-family: Noto-Sans-Display, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, button {
+    font-family: Edo, serif;
+}
