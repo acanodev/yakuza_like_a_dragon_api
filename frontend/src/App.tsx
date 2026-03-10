@@ -18,7 +18,7 @@ function App() {
           action={() => console.log("clic")}
           dtoggle="modal"
           dtarget="#myModal"
-          aexpanded="false"
+          aexpanded={false}
           acontrols="modalContent"
         >
           TEST

@@ -16,7 +16,7 @@ function Button({
   action?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   dtoggle?: string;
   dtarget?: string;
-  aexpanded?: string;
+  aexpanded?: boolean | undefined;
   acontrols?: string;
 }) {
   return (
