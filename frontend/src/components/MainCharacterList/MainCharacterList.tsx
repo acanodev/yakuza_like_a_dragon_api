@@ -9,20 +9,39 @@ import type { MainCharacter } from "../../types/Main_Chartacter";
 import type { ListType } from "../../types/ListType";
 import { BASE_URL, MAIN_CHARACTERS_ENDPOINT } from "../../constants/consts";
 import List from "../List";
+import MainCharacterModal from "../MainCharacterModal/MainCharacterModal";
 
 type MainCharacterListProps = {
   switchList: (curList: ListType) => void;
 };
 
 function MainCharacterList({ switchList }: MainCharacterListProps) {
-  const [reloadURLKey, setReloadURLKey] = useState(0);
+  const [reloadURLKey, setReloadURLKey] = useState<Number>(0);
+  const [showMcDetail, setShowMcDetail] = useState<Boolean>(false);
+  const [selectedId, setSelectedId] = useState<Number | null>(null);
 
-  const { data, loading, error } = useGetAxios<MainCharacter[]>(
+  const {
+    data: allData,
+    loading: allLoading,
+    error: allError,
+  } = useGetAxios<MainCharacter[]>(
     `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}?r=${reloadURLKey}`,
   );
 
+  const {
+    data: current,
+    loading: loadingCurrent,
+    error: errorCurrent,
+  } = useGetAxios<MainCharacter>(`${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}`);
+
   const showDetail = (id: number) => {
-    console.log("Detail:", id);
+    setShowMcDetail(true);
+    setSelectedId(id);
+  };
+
+  const closeDetail = () => {
+    setShowMcDetail(false);
+    setSelectedId(null);
   };
 
   const showEdit = (id: number) => {
@@ -57,14 +76,17 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
           </Button>
         </div>
       </div>
+
       <Card headerText="Main Characters" id="mainCharacterList">
         <List
-          content={data ?? []}
+          content={allData ?? []}
           showDetail={showDetail}
           showEdit={showEdit}
           showDelete={showDelete}
         ></List>
       </Card>
+
+        <MainCharacterModal show={showMcDetail} data={current} toggleShow={closeDetail}></MainCharacterModal>
     </>
   );
 }

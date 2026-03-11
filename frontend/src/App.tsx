@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import Button from "./components/Button";
 import type { ListType } from "./types/ListType";
 import { ACTIVE_LIST_KEY } from "./constants/consts";
 import MainCharacterList from "./components/MainCharacterList/MainCharacterList";
@@ -29,7 +28,12 @@ function App() {
         </header>
 
         <div className="mt-5">
-          <MainCharacterList switchList={switchList}></MainCharacterList>
+          {list === "mainCharacters" && (
+            <MainCharacterList switchList={switchList}></MainCharacterList>
+          )}
+          {/* {list === "sujimon" && (
+            
+          )} */}
         </div>
       </div>
     </>
