@@ -3,7 +3,7 @@ import "./MainCharacterModal.css";
 import type { MainCharacter } from "../../types/Main_Chartacter";
 
 type MainCharacterModalProps = {
-  show: Boolean;
+  show: boolean;
   data: MainCharacter | null;
   toggleShow: () => void;
 };
