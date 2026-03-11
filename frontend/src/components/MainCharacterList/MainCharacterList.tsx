@@ -17,12 +17,8 @@ type MainCharacterListProps = {
 function MainCharacterList({ switchList }: MainCharacterListProps) {
   const [reloadURLKey, setReloadURLKey] = useState(0);
 
-  const {
-    data,
-    loading,
-    error
-  } = useGetAxios<MainCharacter[]>(
-    `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}?r=${reloadURLKey}`
+  const { data, loading, error } = useGetAxios<MainCharacter[]>(
+    `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}?r=${reloadURLKey}`,
   );
 
   const showDetail = (id: number) => {
@@ -39,8 +35,25 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
 
   return (
     <>
+      <div className="row mb-5">
+        <div className="col-3">
+          <Button
+            bootstrap="btn btn-sujimon text-white"
+            type="button"
+            action={() => switchList("mainCharacters")}
+          >
+            <i className="fa-solid fa-skull pe-4"></i> Canviar a llistat de
+            Sujimon
+          </Button>
+        </div>
+      </div>
       <Card headerText="Main Characters" id="mainCharacterList">
-        <List content={data ?? []} showDetail={showDetail} showEdit={showEdit} showDelete={showDelete}></List>
+        <List
+          content={data ?? []}
+          showDetail={showDetail}
+          showEdit={showEdit}
+          showDelete={showDelete}
+        ></List>
       </Card>
     </>
   );

@@ -14,7 +14,7 @@ function List({ content, showDetail, showDelete, showEdit }: ListProps) {
   return (
     <ul className="d-flex flex-wrap ms-4">
       {content?.map((el) => (
-        <li key={el.id_num} className="ms-5">
+        <li key={el.id_num} className="ms-1">
           <Card headerText={undefined} id={undefined}>
             <div className="text-center">
               <img src={el.image} alt="" />
@@ -28,7 +28,7 @@ function List({ content, showDetail, showDelete, showEdit }: ListProps) {
 
               <div>
                 <Button
-                  bootstrap="btn btn-sm btn-warning me-3"
+                  bootstrap="btn btn-warning me-3"
                   action={() => showDetail(el.id_num)}
                 >
                   <i className="fa-solid fa-eye"></i>

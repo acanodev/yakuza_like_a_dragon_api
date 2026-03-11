@@ -28,19 +28,7 @@ function App() {
           </h1>
         </header>
 
-        <Button
-          bootstrap="btn btn-primary"
-          type="button"
-          action={() => console.log("clic")}
-          dtoggle="modal"
-          dtarget="#myModal"
-          aexpanded={false}
-          acontrols="modalContent"
-        >
-          TEST
-        </Button>
-
-        <div className="mt-4">
+        <div className="mt-5">
           <MainCharacterList switchList={switchList}></MainCharacterList>
         </div>
       </div>

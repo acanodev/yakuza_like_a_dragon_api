@@ -3,7 +3,40 @@ ul {
     justify-content: center;
 }
 
+.btn-sujimon {
+    background-color: #2b0107;
+}
+
+.btn-sujimon:hover {
+    background-color: #670310;
+    color: rgb(180, 176, 176);
+}
+
+#mainCharacterList {
+    border-color: gold;
+    color: gold;
+}
+
+.card-header {
+    text-align: center;
+    font-size: x-large;
+    background-color: #2b0107;
+}
+
 .card img {
     width: 300px;
     height: 300px;
+}
+
+#mainCharacterList .card-body {
+    background-color: #8e201c;
+}
+
+#mainCharacterList li .card {
+    border-color: gold !important;
+}
+
+#mainCharacterList li .card-body {
+    background-color: #2b0107;
+    color: gold;
 }
