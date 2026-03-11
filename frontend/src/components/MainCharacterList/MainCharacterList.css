@@ -1,0 +1,9 @@
+ul {
+    list-style: none;
+    justify-content: center;
+}
+
+.card img {
+    width: 300px;
+    height: 300px;
+}

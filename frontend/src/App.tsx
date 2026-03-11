@@ -1,11 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Button from "./components/Button";
-import type { ListType } from "./types/ListType"
+import type { ListType } from "./types/ListType";
+import { ACTIVE_LIST_KEY } from "./constants/consts";
+import MainCharacterList from "./components/MainCharacterList/MainCharacterList";
 
 function App() {
 
-  const [list, setList] = useState<ListType>("mainCharacters");
+  const [list, setList] = useState(() => {
+    return localStorage.getItem(ACTIVE_LIST_KEY) || "mainCharacters";
+  }); // mainCharacters | sujimon
+  useEffect(() => {
+    localStorage.setItem(ACTIVE_LIST_KEY, list);
+  });
 
   const switchList = (curList : ListType) : void => {
     const selectedList = curList !== "mainCharacters" ? "mainCharacters" : "sujimon";
@@ -33,7 +40,9 @@ function App() {
           TEST
         </Button>
 
-
+        <div className="mt-4">
+          <MainCharacterList switchList={switchList}></MainCharacterList>
+        </div>
       </div>
     </>
   );

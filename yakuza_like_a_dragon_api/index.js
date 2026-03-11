@@ -28,7 +28,7 @@ app.use(helmet());
 app.use(
   cors({
     origin: (origin, callback) => {
-      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5174"];
+      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"];
 
       if (!origin) return callback(null, true);
 
