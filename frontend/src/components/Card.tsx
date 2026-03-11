@@ -1,6 +1,12 @@
 import React from "react";
 
-function Card({ headerText = undefined, children, id = undefined } : { headerText : string | undefined, children : React.ReactNode, id : any }) {
+type CardProps = {
+  headerText: string | undefined,
+  children: React.ReactNode,
+  id: any
+}
+
+function Card({ headerText = undefined, children, id = undefined } : CardProps) {
   const className = `card mb-4`;
 
   return (
