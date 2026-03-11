@@ -16,9 +16,9 @@ type MainCharacterListProps = {
 };
 
 function MainCharacterList({ switchList }: MainCharacterListProps) {
-  const [reloadURLKey, setReloadURLKey] = useState<Number>(0);
-  const [showMcDetail, setShowMcDetail] = useState<Boolean>(false);
-  const [selectedId, setSelectedId] = useState<Number | null>(null);
+  const [reloadURLKey, setReloadURLKey] = useState<number>(0);
+  const [showMcDetail, setShowMcDetail] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const {
     data: allData,
@@ -32,7 +32,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
     data: current,
     loading: loadingCurrent,
     error: errorCurrent,
-  } = useGetAxios<MainCharacter>(`${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}`);
+  } = useGetAxios<MainCharacter>(selectedId ? `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}` : null);
 
   const showDetail = (id: number) => {
     setShowMcDetail(true);

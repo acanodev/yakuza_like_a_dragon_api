@@ -2,7 +2,7 @@ import React from "react";
 import Button from "./Button";
 
 type ModalProps = {
-  show: Boolean;
+  show: boolean;
   title: string | undefined;
   children: React.ReactNode;
   submitButton: boolean;
