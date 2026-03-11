@@ -1,8 +1,17 @@
 import { useState } from "react";
 import "./App.css";
 import Button from "./components/Button";
+import type { ListType } from "./types/ListType"
 
 function App() {
+
+  const [list, setList] = useState<ListType>("mainCharacters");
+
+  const switchList = (curList : ListType) : void => {
+    const selectedList = curList !== "mainCharacters" ? "mainCharacters" : "sujimon";
+    setList(selectedList);
+  };
+
   return (
     <>
       <div className="container">
@@ -23,6 +32,8 @@ function App() {
         >
           TEST
         </Button>
+
+
       </div>
     </>
   );
