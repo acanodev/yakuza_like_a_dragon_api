@@ -13,8 +13,7 @@ ul {
 }
 
 #mainCharacterList {
-    border-color: gold;
-    color: gold;
+    color: white;
 }
 
 .card-header {
@@ -32,11 +31,7 @@ ul {
     background-color: #8e201c;
 }
 
-#mainCharacterList li .card {
-    border-color: gold !important;
-}
-
 #mainCharacterList li .card-body {
     background-color: #2b0107;
-    color: gold;
+    color: white;
 }

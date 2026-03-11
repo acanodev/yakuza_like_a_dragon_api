@@ -46,6 +46,16 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
             Sujimon
           </Button>
         </div>
+        <div className="col-3">
+          <Button
+            bootstrap="btn btn-warning"
+            type="button"
+            action={() => console.log("Create")}
+          >
+            <i className="fa-solid fa-circle-plus pe-4"></i> Afegir Main
+            Character
+          </Button>
+        </div>
       </div>
       <Card headerText="Main Characters" id="mainCharacterList">
         <List
