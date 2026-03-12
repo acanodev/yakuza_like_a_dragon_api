@@ -5,7 +5,7 @@ import Button from "../Button";
 import { useGetAxios } from "../../hooks/useAxios";
 import { usePostAxios } from "../../hooks/useAxios";
 import { useDeleteAxios } from "../../hooks/useAxios";
-import type { MainCharacter } from "../../types/Main_Chartacter";
+import type { MainCharacter, NewMainCharacter } from "../../types/Main_Chartacter";
 import type { ListType } from "../../types/ListType";
 import { BASE_URL, MAIN_CHARACTERS_ENDPOINT } from "../../constants/consts";
 import List from "../List";
@@ -38,7 +38,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
     selectedId ? `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}` : null,
   );
 
-  const { handlePost, loading: uploading, error: postError } = usePostAxios();
+  const { handlePost, loading: uploading, error: postError } = usePostAxios<MainCharacter, NewMainCharacter>();
 
   const showDetail = (id: number) => {
     setShowMcDetail(true);
@@ -127,6 +127,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
         data={current}
         toggleShow={closeDetail}
       ></MainCharacterModal>
+
       <MainCharacterForm
         show={showMcForm}
         toggleShow={closeForm}
