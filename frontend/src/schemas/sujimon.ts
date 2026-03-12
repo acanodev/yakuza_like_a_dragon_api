@@ -14,7 +14,7 @@ const arraySchema = z
 
 export const sujimonSchema = z.object({
     name: z.string().min(1),
-    id_num: z.number().int().positive(),
+    id_num: z.coerce.number().int().positive(),
     category: z.string().min(1),
     common_locations: arraySchema,
     rarity: z.number().int().min(1).max(5),
@@ -22,5 +22,5 @@ export const sujimonSchema = z.object({
     weaknesses: arraySchema,
     drops: arraySchema,
     image: z.string().url().optional(),
-    description: z.string().min(1).optional(),
+    description: z.string().optional(),
 });
