@@ -10,8 +10,8 @@ const jobsSchema = z
 
 export const mainCharacterSchema = z.object({
   name: z.string().min(1),
-  id_num: z.number().int().positive(),
+  id_num: z.coerce.number().int().positive(),
   jobs: jobsSchema, // A l'schema utilitzem jobSchema per validar la conversió directament.
   image: z.string().url().optional(),
-  description: z.string().min(1).optional(),
+  description: z.string().optional(),
 });
