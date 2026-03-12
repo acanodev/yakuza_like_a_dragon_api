@@ -34,7 +34,11 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
     data: current,
     loading: loadingCurrent,
     error: errorCurrent,
-  } = useGetAxios<MainCharacter>(selectedId ? `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}` : null);
+  } = useGetAxios<MainCharacter>(
+    selectedId ? `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}` : null,
+  );
+
+  const { handlePost, loading: uploading, error: postError } = usePostAxios();
 
   const showDetail = (id: number) => {
     setShowMcDetail(true);
@@ -51,14 +55,30 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
     if (id) {
       setSelectedId(id);
     }
-  }
+  };
 
   const closeForm = () => {
     setShowMcForm(false);
     if (selectedId) {
       setSelectedId(null);
     }
-  }
+  };
+
+  const createMainCharacter = (data: any) => {
+    const url = `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}`;
+
+    handlePost(
+      url,
+      {
+        ...data,
+        description: data.description?.trim() || "Sin descripción",
+      },
+      () => {
+        closeForm();
+        setReloadURLKey((prev) => prev + 1);
+      },
+    );
+  };
 
   const showEdit = (id: number) => {
     console.log("Edit:", id);
@@ -102,8 +122,16 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
         ></List>
       </Card>
 
-        <MainCharacterModal show={showMcDetail} data={current} toggleShow={closeDetail}></MainCharacterModal>
-        <MainCharacterForm show={showMcForm} toggleShow={closeForm} submitHandler={() => console.log("SUBMIT")}></MainCharacterForm>
+      <MainCharacterModal
+        show={showMcDetail}
+        data={current}
+        toggleShow={closeDetail}
+      ></MainCharacterModal>
+      <MainCharacterForm
+        show={showMcForm}
+        toggleShow={closeForm}
+        submitHandler={createMainCharacter}
+      ></MainCharacterForm>
     </>
   );
 }

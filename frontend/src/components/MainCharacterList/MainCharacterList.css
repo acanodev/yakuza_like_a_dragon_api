@@ -28,6 +28,10 @@ ul {
     height: 300px;
 }
 
+#mainCharacterList .card {
+    margin: 30px;
+}
+
 #mainCharacterList .card-body {
     background-color: #641613;
 }

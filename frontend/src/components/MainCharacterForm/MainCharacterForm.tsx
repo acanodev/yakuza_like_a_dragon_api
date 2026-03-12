@@ -40,7 +40,7 @@ function MainCharacterForm({ show, data, submitHandler, toggleShow }: MainCharac
         </Input>
 
         <Input bootstrap="form-control" type="text" name="jobs" id="jobs">
-          Treballs ("," separated)
+          Treballs (separat per ",")
         </Input>
 
         <Input bootstrap="form-control" type="text" name="image" id="image">
