@@ -1,5 +1,16 @@
 import React from "react";
 
+type ButtonProps = {
+  bootstrap?: string;
+  type?: "submit" | "reset" | "button";
+  children?: React.ReactNode;
+  action?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  dtoggle?: string;
+  dtarget?: string;
+  aexpanded?: boolean | undefined;
+  acontrols?: string;
+};
+
 function Button({
   bootstrap = "",
   type = "button",
@@ -9,16 +20,7 @@ function Button({
   dtarget = undefined,
   aexpanded = undefined,
   acontrols = undefined,
-}: {
-  bootstrap?: string;
-  type?: "submit" | "reset" | "button";
-  children?: React.ReactNode;
-  action?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  dtoggle?: string;
-  dtarget?: string;
-  aexpanded?: boolean | undefined;
-  acontrols?: string;
-}) {
+}: ButtonProps) {
   return (
     <button
       className={bootstrap}
