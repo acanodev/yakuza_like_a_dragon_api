@@ -10,11 +10,15 @@
 
 body {
     font-family: Noto-Sans-Display, sans-serif;
-    background-image: url(assets/background.jpg);
+    background-image: url(assets/background.png);
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 h1, h2, h3, h4, h5, h6, button, .btn, .card-header {
     font-family: Edo, serif;
+}
+
+.card {
+    border: none !important;
 }
