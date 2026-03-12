@@ -1,6 +1,7 @@
 .modal-header {
     color: white;
     background-color: #2b0107;
+    border-bottom-color: gold !important;
 }
 
 .btn-close {
@@ -20,4 +21,5 @@
 .modal-footer {
     color: white;
     background-color: #2b0107;
+    border-top-color: gold !important;
 }
