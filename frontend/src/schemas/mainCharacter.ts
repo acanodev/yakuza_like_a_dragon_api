@@ -8,7 +8,7 @@ const jobsSchema = z
     val.split(",").map((job) => job.trim())
   );
 
-export const newMainCharacterSchema = z.object({
+export const mainCharacterSchema = z.object({
   name: z.string().min(1),
   id_num: z.number().int().positive(),
   jobs: jobsSchema, // A l'schema utilitzem jobSchema per validar la conversió directament.
