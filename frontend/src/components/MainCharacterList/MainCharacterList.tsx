@@ -5,10 +5,14 @@ import Button from "../Button";
 import { useGetAxios } from "../../hooks/useAxios";
 import { usePostAxios } from "../../hooks/useAxios";
 import { useDeleteAxios } from "../../hooks/useAxios";
-import type { MainCharacter, NewMainCharacter } from "../../types/Main_Chartacter";
+import type {
+  MainCharacter,
+  NewMainCharacter,
+} from "../../types/Main_Chartacter";
 import type { ListType } from "../../types/ListType";
 import { BASE_URL, MAIN_CHARACTERS_ENDPOINT } from "../../constants/consts";
 import List from "../List";
+import Modal from "../Modal";
 import MainCharacterModal from "../MainCharacterModal/MainCharacterModal";
 import MainCharacterForm from "../MainCharacterForm/MainCharacterForm";
 
@@ -20,6 +24,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
   const [reloadURLKey, setReloadURLKey] = useState<number>(0);
   const [showMcDetail, setShowMcDetail] = useState<boolean>(false);
   const [showMcForm, setShowMcForm] = useState<boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const {
@@ -38,7 +43,17 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
     selectedId ? `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}` : null,
   );
 
-  const { handlePost, loading: uploading, error: postError } = usePostAxios<MainCharacter, NewMainCharacter>();
+  const {
+    handlePost,
+    loading: uploading,
+    error: postError,
+  } = usePostAxios<MainCharacter, NewMainCharacter>();
+
+  const {
+    handleDelete,
+    loading: deleting,
+    error: deleteError,
+  } = useDeleteAxios<void>();
 
   const showDetail = (id: number) => {
     setShowMcDetail(true);
@@ -85,7 +100,26 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
   };
 
   const showDelete = (id: number) => {
-    console.log("Delete:", id);
+    setShowDeleteModal(true);
+    setSelectedId(id);
+  };
+
+  const closeDelete = () => {
+    setShowDeleteModal(false);
+    setSelectedId(null);
+  };
+
+  const deleteMainCharacter = (id: number) => {
+    if (!id) {
+      closeDelete();
+      return;
+    }
+
+    const url = `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${id}`;
+    handleDelete(url, () => {
+      closeDelete();
+      setReloadURLKey((prev) => prev + 1);
+    });
   };
 
   return (
@@ -133,6 +167,22 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
         toggleShow={closeForm}
         submitHandler={createMainCharacter}
       ></MainCharacterForm>
+
+      <Modal
+        show={showDeleteModal}
+        title={`Eliminar ${current?.name}`}
+        submitButton={true}
+        submitButtonText="Eliminar"
+        submitButtonBootstrap="btn btn-danger"
+        toggleShow={closeDelete}
+        action={deleteMainCharacter}
+        target={current?.id_num}
+      >
+        <span>
+          Estàs segur que vols eliminar {current?.name}? Aquesta acció és
+          irreversible!
+        </span>
+      </Modal>
     </>
   );
 }
