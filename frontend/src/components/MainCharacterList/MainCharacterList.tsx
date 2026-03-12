@@ -10,6 +10,7 @@ import type { ListType } from "../../types/ListType";
 import { BASE_URL, MAIN_CHARACTERS_ENDPOINT } from "../../constants/consts";
 import List from "../List";
 import MainCharacterModal from "../MainCharacterModal/MainCharacterModal";
+import MainCharacterForm from "../MainCharacterForm/MainCharacterForm";
 
 type MainCharacterListProps = {
   switchList: (curList: ListType) => void;
@@ -18,6 +19,7 @@ type MainCharacterListProps = {
 function MainCharacterList({ switchList }: MainCharacterListProps) {
   const [reloadURLKey, setReloadURLKey] = useState<number>(0);
   const [showMcDetail, setShowMcDetail] = useState<boolean>(false);
+  const [showMcForm, setShowMcForm] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   const {
@@ -44,6 +46,20 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
     setSelectedId(null);
   };
 
+  const showForm = (id: number | undefined) => {
+    setShowMcForm(true);
+    if (id) {
+      setSelectedId(id);
+    }
+  }
+
+  const closeForm = () => {
+    setShowMcForm(false);
+    if (selectedId) {
+      setSelectedId(null);
+    }
+  }
+
   const showEdit = (id: number) => {
     console.log("Edit:", id);
   };
@@ -69,7 +85,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
           <Button
             bootstrap="btn btn-warning"
             type="button"
-            action={() => console.log("Create")}
+            action={() => showForm(undefined)}
           >
             <i className="fa-solid fa-circle-plus pe-4"></i> Afegir Main
             Character
@@ -87,6 +103,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
       </Card>
 
         <MainCharacterModal show={showMcDetail} data={current} toggleShow={closeDetail}></MainCharacterModal>
+        <MainCharacterForm show={showMcForm} toggleShow={closeForm} submitHandler={() => console.log("SUBMIT")}></MainCharacterForm>
     </>
   );
 }

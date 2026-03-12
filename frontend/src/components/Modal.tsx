@@ -9,7 +9,7 @@ type ModalProps = {
   submitButtonText?: string;
   submitButtonBootstrap?: string;
   secondaryButtonBootstrap?: string;
-  secondaryButtonText: string;
+  secondaryButtonText?: string;
   toggleShow: () => void;
   target?: number;
   action?: (id: number) => void;
