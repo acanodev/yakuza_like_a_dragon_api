@@ -86,6 +86,59 @@ export const usePostAxios = <TResponse, TBody>() => {
 
 /*
 
+A App.tsx indicarem el tipus de resposta (<TResponse>) que volem rebre 
+i el tipus de body (<TBody>) que enviarem.
+
+Exemple d'ús:
+
+const { handlePut } = usePutAxios<Sujimon, NewSujimon>(); 
+// Volem rebre un Sujimon actualitzat i enviarem un NewSujimon al body de la petició.
+
+handlePut("/api/sujimon/123", updatedSujimon, (updated) => {
+  console.log(updated.name);
+});
+
+*/
+export const usePutAxios = <TResponse, TBody>() => {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const controllerRef = useRef<AbortController | null>(null);
+
+  const handlePut = async (
+    url: string,
+    data: TBody,
+    onSuccess?: (data: TResponse) => void
+  ): Promise<TResponse | null> => {
+    controllerRef.current?.abort();
+    controllerRef.current = new AbortController();
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      const res = await axios.put<TResponse>(url, data, {
+        signal: controllerRef.current.signal,
+      });
+
+      onSuccess?.(res.data);
+
+      return res.data;
+    } catch (err: any) {
+      if (!axios.isCancel(err)) {
+        setError(err.message);
+      }
+      return null;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { handlePut, loading, error };
+};
+
+/*
+
 Com que l'API només retorna un codi 204 No Content no fa falta indicar el tipus de resposta
 a App.tsx, podem declarar-ho com a void:
 
