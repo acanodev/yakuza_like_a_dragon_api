@@ -14,6 +14,7 @@ import { BASE_URL, SUJIMON_ENDPOINT } from "../../constants/consts";
 import List from "../List";
 import Modal from "../Modal";
 import SujimonModal from "../SujimonModal/SujimonModal";
+import SujimonForm from "../SujimonForm/SujimonForm";
 // import MainCharacterModal from "../MainCharacterModal/MainCharacterModal";
 // import MainCharacterForm from "../MainCharacterForm/MainCharacterForm";
 
@@ -162,17 +163,11 @@ function SujimonList({ switchList }: SujimonListProps) {
         toggleShow={closeDetail}
       ></SujimonModal>
 
-      {/* <MainCharacterModal
-        show={showSujimonDetail}
-        data={current}
-        toggleShow={closeDetail}
-      ></MainCharacterModal>
-
-      <MainCharacterForm
+      <SujimonForm
         show={showSujimonForm}
         toggleShow={closeForm}
         submitHandler={createSujimon}
-      ></MainCharacterForm> */}
+      ></SujimonForm>
 
       <Modal
         show={showDeleteModal}
