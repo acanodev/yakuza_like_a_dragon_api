@@ -46,7 +46,9 @@ function SujimonModal({ show, data, toggleShow }: SujimonModalProps) {
 
               let displayValue;
 
-              if (Array.isArray(value)) {
+              if (field === "rarity" && typeof value === "number") {
+                displayValue = "⭐".repeat(value);
+              } else if (Array.isArray(value)) {
                 displayValue = value.length >= 1 ? value.join(", ") : "-";
               } else if (
                 value === null ||
