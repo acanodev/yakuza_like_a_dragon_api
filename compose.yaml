@@ -1,0 +1,40 @@
+services:
+  mongo:
+    image: mongo:8.0
+    container_name: yakuza_like_a_dragon_mongo
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - yakuza-like-a-dragon-data:/data/db
+    restart: unless-stopped
+    networks:
+      - yakuza-like-a-dragon-api-backend
+  api:
+    build: ./yakuza_like_a_dragon_api
+    container_name: yakuza_like_a_dragon_api
+    ports:
+      - "3001:3001"
+    env_file:
+      - .env
+    networks:
+      - yakuza-like-a-dragon-api-backend
+    depends_on:
+      - mongo
+    restart: unless-stopped
+  frontend:
+    build: ./frontend
+    container_name: yakuza_like_a_dragon_frontend
+    ports:
+      - "8080:80"
+    networks:
+      - yakuza-like-a-dragon-api-backend
+      - yakuza-like-a-dragon-api-frontend
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  yakuza-like-a-dragon-data:
+networks:
+  yakuza-like-a-dragon-api-backend:
+  yakuza-like-a-dragon-api-frontend:
