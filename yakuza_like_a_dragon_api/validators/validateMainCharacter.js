@@ -1,8 +1,10 @@
 const mainCharacter = require("../models/Main_Character");
 
-module.exports = async (data) => {
+module.exports = async (data, idToIgnore) => {
   const mcs = await mainCharacter.find({});
-  const ids_num = mcs.map((el) => el.id_num);
+  const ids_num = mcs
+    .filter(el => el.id_num !== idToIgnore)
+    .map(el => el.id_num);
 
   if (!data.name || typeof data.name !== "string") {
     return "Name must be a string";

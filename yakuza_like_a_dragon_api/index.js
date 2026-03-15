@@ -169,7 +169,7 @@ app.get("/api/main_characters/:id", async (request, response, next) => {
 app.post("/api/main_characters", async (request, response, next) => {
   const mc = request.body;
 
-  const error = await validateMainCharacter(mc);
+  const error = await validateMainCharacter(mc, undefined);
 
   if (error) {
     return response.status(400).json({
@@ -235,7 +235,7 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
   const id = request.params.id;
   const mc = request.body;
 
-  const error = await validateMainCharacter(mc);
+  const error = await validateMainCharacter(mc, Number(id));
 
   if (error) {
     return response.status(400).json({
@@ -267,7 +267,7 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
       });
     }
 
-    update ? response.json(updated) : next();
+    updated ? response.json(updated) : next();
   } catch (error) {
     next(error);
   }
@@ -410,7 +410,7 @@ app.get("/api/sujimon/:id", async (request, response, next) => {
 app.post("/api/sujimon", async (request, response, next) => {
   const sujimon = request.body;
 
-  const error = await validateSujimon(sujimon);
+  const error = await validateSujimon(sujimon, undefined);
 
   if (error) {
     return response.status(400).json({
@@ -495,7 +495,7 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
   const id = request.params.id;
   const sujimon = request.body;
 
-  const error = await validateSujimon(sujimon);
+  const error = await validateSujimon(sujimon, Number(id));
 
   if (error) {
     return response.status(400).json({
