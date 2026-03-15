@@ -3,6 +3,7 @@ import "./App.css";
 import type { ListType } from "./types/ListType";
 import { ACTIVE_LIST_KEY } from "./constants/consts";
 import MainCharacterList from "./components/MainCharacterList/MainCharacterList";
+import SujimonList from "./components/SujimonList/SujimonList";
 
 function App() {
 
@@ -31,9 +32,9 @@ function App() {
           {list === "mainCharacters" && (
             <MainCharacterList switchList={switchList}></MainCharacterList>
           )}
-          {/* {list === "sujimon" && (
-            
-          )} */}
+          {list === "sujimon" && (
+            <SujimonList switchList={switchList}></SujimonList>
+          )}
         </div>
       </div>
     </>

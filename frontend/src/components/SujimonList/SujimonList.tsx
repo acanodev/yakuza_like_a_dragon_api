@@ -1,4 +1,4 @@
-import "./MainCharacterList.css";
+import "./SujimonList.css";
 import { useState, useEffect } from "react";
 import Card from "../Card";
 import Button from "../Button";
@@ -6,24 +6,24 @@ import { useGetAxios } from "../../hooks/useAxios";
 import { usePostAxios } from "../../hooks/useAxios";
 import { useDeleteAxios } from "../../hooks/useAxios";
 import type {
-  MainCharacter,
-  NewMainCharacter,
-} from "../../types/Main_Character";
+  Sujimon,
+  NewSujimon,
+} from "../../types/Sujimon";
 import type { ListType } from "../../types/ListType";
-import { BASE_URL, MAIN_CHARACTERS_ENDPOINT } from "../../constants/consts";
+import { BASE_URL, SUJIMON_ENDPOINT } from "../../constants/consts";
 import List from "../List";
 import Modal from "../Modal";
-import MainCharacterModal from "../MainCharacterModal/MainCharacterModal";
-import MainCharacterForm from "../MainCharacterForm/MainCharacterForm";
+// import MainCharacterModal from "../MainCharacterModal/MainCharacterModal";
+// import MainCharacterForm from "../MainCharacterForm/MainCharacterForm";
 
-type MainCharacterListProps = {
+type SujimonListProps = {
   switchList: (curList: ListType) => void;
 };
 
-function MainCharacterList({ switchList }: MainCharacterListProps) {
+function SujimonList({ switchList }: SujimonListProps) {
   const [reloadURLKey, setReloadURLKey] = useState<number>(0);
-  const [showMcDetail, setShowMcDetail] = useState<boolean>(false);
-  const [showMcForm, setShowMcForm] = useState<boolean>(false);
+  const [showSujimonDetail, setShowSujimonDetail] = useState<boolean>(false);
+  const [showSujimonForm, setShowSujimonForm] = useState<boolean>(false);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
@@ -31,23 +31,23 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
     data: allData,
     loading: allLoading,
     error: allError,
-  } = useGetAxios<MainCharacter[]>(
-    `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}?r=${reloadURLKey}`,
+  } = useGetAxios<Sujimon[]>(
+    `${BASE_URL}/${SUJIMON_ENDPOINT}?r=${reloadURLKey}`,
   );
 
   const {
     data: current,
     loading: loadingCurrent,
     error: errorCurrent,
-  } = useGetAxios<MainCharacter>(
-    selectedId ? `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}` : null,
+  } = useGetAxios<Sujimon>(
+    selectedId ? `${BASE_URL}/${SUJIMON_ENDPOINT}/${selectedId}` : null,
   );
 
   const {
     handlePost,
     loading: uploading,
     error: postError,
-  } = usePostAxios<MainCharacter, NewMainCharacter>();
+  } = usePostAxios<Sujimon, NewSujimon>();
 
   const {
     handleDelete,
@@ -56,31 +56,31 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
   } = useDeleteAxios<void>();
 
   const showDetail = (id: number) => {
-    setShowMcDetail(true);
+    setShowSujimonDetail(true);
     setSelectedId(id);
   };
 
   const closeDetail = () => {
-    setShowMcDetail(false);
+    setShowSujimonDetail(false);
     setSelectedId(null);
   };
 
   const showForm = (id: number | undefined) => {
-    setShowMcForm(true);
+    setShowSujimonForm(true);
     if (id) {
       setSelectedId(id);
     }
   };
 
   const closeForm = () => {
-    setShowMcForm(false);
+    setShowSujimonForm(false);
     if (selectedId) {
       setSelectedId(null);
     }
   };
 
-  const createMainCharacter = (data: any) => {
-    const url = `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}`;
+  const createSujimon = (data: any) => {
+    const url = `${BASE_URL}/${SUJIMON_ENDPOINT}`;
 
     handlePost(
       url,
@@ -115,7 +115,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
       return;
     }
 
-    const url = `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${id}`;
+    const url = `${BASE_URL}/${SUJIMON_ENDPOINT}/${id}`;
     handleDelete(url, () => {
       closeDelete();
       setReloadURLKey((prev) => prev + 1);
@@ -127,12 +127,12 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
       <div className="row mb-5">
         <div className="col-3">
           <Button
-            bootstrap="btn btn-sujimon text-white"
+            bootstrap="btn btn-mc text-white"
             type="button"
-            action={() => switchList("mainCharacters")}
+            action={() => switchList("sujimon")}
           >
-            <i className="fa-solid fa-skull pe-4"></i> Canviar a llistat de
-            Sujimon
+            <i className="fa-solid fa-dragon pe-4"></i> Canviar a llistat de
+            Main Characters
           </Button>
         </div>
         <div className="col-3">
@@ -141,13 +141,12 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
             type="button"
             action={() => showForm(undefined)}
           >
-            <i className="fa-solid fa-circle-plus pe-4"></i> Afegir Main
-            Character
+            <i className="fa-solid fa-circle-plus pe-4"></i> Afegir Sujimon
           </Button>
         </div>
       </div>
 
-      <Card headerText="Main Characters" id="mainCharacterList">
+      <Card headerText="Sujimon" id="sujimonList">
         <List
           content={allData ?? []}
           showDetail={showDetail}
@@ -156,17 +155,17 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
         ></List>
       </Card>
 
-      <MainCharacterModal
-        show={showMcDetail}
+      {/* <MainCharacterModal
+        show={showSujimonDetail}
         data={current}
         toggleShow={closeDetail}
       ></MainCharacterModal>
 
       <MainCharacterForm
-        show={showMcForm}
+        show={showSujimonForm}
         toggleShow={closeForm}
-        submitHandler={createMainCharacter}
-      ></MainCharacterForm>
+        submitHandler={createSujimon}
+      ></MainCharacterForm> */}
 
       <Modal
         show={showDeleteModal}
@@ -187,4 +186,4 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
   );
 }
 
-export default MainCharacterList;
+export default SujimonList;
