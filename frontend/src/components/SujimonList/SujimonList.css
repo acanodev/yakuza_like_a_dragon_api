@@ -1,0 +1,47 @@
+ul {
+    list-style: none;
+    justify-content: center;
+}
+
+.btn-mc {
+    background-color: #2b0107;
+}
+
+.btn-mc:hover {
+    background-color: #670310;
+    color: rgb(180, 176, 176);
+}
+
+#sujimonList {
+    color: white;
+    box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.494);
+}
+
+.card-header {
+    text-align: center;
+    font-size: x-large;
+    background-color: #2b0107;
+}
+
+.card img {
+    width: 300px;
+    height: 300px;
+}
+
+#sujimonList .card {
+    margin: 30px;
+}
+
+#sujimonList .card-body {
+    background-color: #641613;
+}
+
+#sujimonList li .card-body {
+    background-color: #710717;
+    color: white;
+    border-style: solid;
+    border-color: gold;
+    border-width: 2px;
+    border-radius: 2%;
+    box-shadow: 2px 2px 10px 5px rgba(0, 0, 0, 0.722);
+}

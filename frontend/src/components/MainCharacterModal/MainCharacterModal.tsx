@@ -1,6 +1,6 @@
 import Modal from "../Modal";
 import "./MainCharacterModal.css";
-import type { MainCharacter } from "../../types/Main_Chartacter";
+import type { MainCharacter } from "../../types/Main_Character";
 
 type MainCharacterModalProps = {
   show: boolean;

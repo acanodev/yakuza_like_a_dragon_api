@@ -6,7 +6,7 @@ import Modal from "../Modal";
 import Button from "../Button";
 import type { z } from "zod";
 import { mainCharacterSchema } from "../../schemas/mainCharacter";
-import type { MainCharacter } from "../../types/Main_Chartacter";
+import type { MainCharacter } from "../../types/Main_Character";
 
 type MainCharacterFormData = z.input<typeof mainCharacterSchema>;
 

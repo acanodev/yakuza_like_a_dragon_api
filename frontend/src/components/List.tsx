@@ -1,6 +1,6 @@
 import Card from "./Card";
 import Button from "./Button";
-import type { MainCharacter } from "../types/Main_Chartacter";
+import type { MainCharacter } from "../types/Main_Character";
 import type { Sujimon } from "../types/Sujimon";
 
 type ListProps = {
