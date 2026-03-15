@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require("dotenv").config();
 const seedMainCharacters = require("./mainCharacterSeeder");
 const seedSujimon = require("./sujimonSeeder");
 
