@@ -4,19 +4,15 @@ import Card from "../Card";
 import Button from "../Button";
 import { useGetAxios } from "../../hooks/useAxios";
 import { usePostAxios } from "../../hooks/useAxios";
+import { usePutAxios } from "../../hooks/useAxios";
 import { useDeleteAxios } from "../../hooks/useAxios";
-import type {
-  Sujimon,
-  NewSujimon,
-} from "../../types/Sujimon";
+import type { Sujimon, NewSujimon } from "../../types/Sujimon";
 import type { ListType } from "../../types/ListType";
 import { BASE_URL, SUJIMON_ENDPOINT } from "../../constants/consts";
 import List from "../List";
 import Modal from "../Modal";
 import SujimonModal from "../SujimonModal/SujimonModal";
 import SujimonForm from "../SujimonForm/SujimonForm";
-// import MainCharacterModal from "../MainCharacterModal/MainCharacterModal";
-// import MainCharacterForm from "../MainCharacterForm/MainCharacterForm";
 
 type SujimonListProps = {
   switchList: (curList: ListType) => void;
@@ -50,6 +46,12 @@ function SujimonList({ switchList }: SujimonListProps) {
     loading: uploading,
     error: postError,
   } = usePostAxios<Sujimon, NewSujimon>();
+
+  const {
+    handlePut,
+    loading: updating,
+    error: putError,
+  } = usePutAxios<Sujimon, NewSujimon>();
 
   const {
     handleDelete,
@@ -97,8 +99,22 @@ function SujimonList({ switchList }: SujimonListProps) {
     );
   };
 
-  const showEdit = (id: number) => {
-    console.log("Edit:", id);
+  const editSujimon = (data: any) => {
+    if (!selectedId) return;
+
+    const url = `${BASE_URL}/${SUJIMON_ENDPOINT}/${selectedId}`;
+
+    handlePut(
+      url,
+      {
+        ...data,
+        description: data.description?.trim() || "Sin descripción",
+      },
+      () => {
+        closeForm();
+        setReloadURLKey((prev) => prev + 1);
+      },
+    );
   };
 
   const showDelete = (id: number) => {
@@ -111,7 +127,7 @@ function SujimonList({ switchList }: SujimonListProps) {
     setSelectedId(null);
   };
 
-  const deleteMainCharacter = (id: number) => {
+  const deleteSujimon = (id: number) => {
     if (!id) {
       closeDelete();
       return;
@@ -152,7 +168,7 @@ function SujimonList({ switchList }: SujimonListProps) {
         <List
           content={allData ?? []}
           showDetail={showDetail}
-          showEdit={showEdit}
+          showEdit={showForm}
           showDelete={showDelete}
         ></List>
       </Card>
@@ -164,9 +180,11 @@ function SujimonList({ switchList }: SujimonListProps) {
       ></SujimonModal>
 
       <SujimonForm
+        key={current?.id_num ?? "new"}
         show={showSujimonForm}
+        data={current ?? undefined}
         toggleShow={closeForm}
-        submitHandler={createSujimon}
+        submitHandler={!current ? createSujimon : editSujimon}
       ></SujimonForm>
 
       <Modal
@@ -176,7 +194,7 @@ function SujimonList({ switchList }: SujimonListProps) {
         submitButtonText="Eliminar"
         submitButtonBootstrap="btn btn-danger"
         toggleShow={closeDelete}
-        action={deleteMainCharacter}
+        action={deleteSujimon}
         target={current?.id_num}
       >
         <span>

@@ -43,7 +43,7 @@ function MainCharacterForm({
           id="name"
           defaultValue={data?.name ?? ""}
         >
-          Name
+          Nom
         </Input>
 
         <Input
@@ -72,12 +72,12 @@ function MainCharacterForm({
 
         <Input
           bootstrap="form-control"
-          type="text"
+          type="url"
           name="image"
           id="image"
           defaultValue={data?.image ?? ""}
         >
-          Image URL
+          URL d'imatge
         </Input>
 
         <Textarea
