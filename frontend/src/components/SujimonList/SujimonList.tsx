@@ -13,6 +13,7 @@ import type { ListType } from "../../types/ListType";
 import { BASE_URL, SUJIMON_ENDPOINT } from "../../constants/consts";
 import List from "../List";
 import Modal from "../Modal";
+import SujimonModal from "../SujimonModal/SujimonModal";
 // import MainCharacterModal from "../MainCharacterModal/MainCharacterModal";
 // import MainCharacterForm from "../MainCharacterForm/MainCharacterForm";
 
@@ -154,6 +155,12 @@ function SujimonList({ switchList }: SujimonListProps) {
           showDelete={showDelete}
         ></List>
       </Card>
+
+      <SujimonModal
+        show={showSujimonDetail}
+        data={current}
+        toggleShow={closeDetail}
+      ></SujimonModal>
 
       {/* <MainCharacterModal
         show={showSujimonDetail}
