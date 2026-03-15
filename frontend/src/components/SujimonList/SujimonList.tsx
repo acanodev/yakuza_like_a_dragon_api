@@ -13,6 +13,7 @@ import List from "../List";
 import Modal from "../Modal";
 import SujimonModal from "../SujimonModal/SujimonModal";
 import SujimonForm from "../SujimonForm/SujimonForm";
+import Alert from "../Alert";
 
 type SujimonListProps = {
   switchList: (curList: ListType) => void;
@@ -165,12 +166,25 @@ function SujimonList({ switchList }: SujimonListProps) {
       </div>
 
       <Card headerText="Sujimon" id="sujimonList">
-        <List
-          content={allData ?? []}
-          showDetail={showDetail}
-          showEdit={showForm}
-          showDelete={showDelete}
-        ></List>
+        {allLoading && (
+          <Alert type="warning">
+            <i className="fa-solid fa-spinner fa-spin-pulse pe-2"></i> Carregant
+            Sujimon...
+          </Alert>
+        )}
+        {allError && (
+          <Alert>
+            <i className="fa-solid fa-square-xmark pe-2"></i> Error carregant Sujimon
+          </Alert>
+        )}
+        {allData && (
+          <List
+            content={allData ?? []}
+            showDetail={showDetail}
+            showEdit={showForm}
+            showDelete={showDelete}
+          ></List>
+        )}
       </Card>
 
       <SujimonModal
