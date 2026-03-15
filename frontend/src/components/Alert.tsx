@@ -1,5 +1,5 @@
 type AlertProps = {
-    type: string;
+    type?: string;
     children: any;
 }
 
