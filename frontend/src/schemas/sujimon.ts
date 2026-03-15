@@ -8,7 +8,13 @@ export const sujimonSchema = z.object({
   rarity: z.coerce.number().int().min(1).max(5),
   skills: z.string().min(1),
   weaknesses: z.string().min(1),
-  drops: z.string().min(1),
-  image: z.string().url().optional(),
+  drops: z.string(),
+  image: z
+    .string()
+    .optional()
+    .transform((val) => (val === "" ? undefined : val)) // converteix "" a undefined
+    .refine((val) => !val || /^https?:\/\/.+$/.test(val), {
+      message: "URL inválida",
+    }),
   description: z.string().optional(),
 });
