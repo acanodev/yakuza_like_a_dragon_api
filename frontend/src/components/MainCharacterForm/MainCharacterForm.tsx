@@ -31,19 +31,19 @@ function MainCharacterForm({ show, data, submitHandler, toggleShow }: MainCharac
         submitHandler={submitHandler as any}
         bootstrap="d-flex flex-column gap-3"
       >
-        <Input bootstrap="form-control" type="text" name="name" id="name">
+        <Input bootstrap="form-control" type="text" name="name" id="name" defaultValue={data?.name}>
           Name
         </Input>
 
-        <Input bootstrap="form-control" type="number" name="id_num" id="id_num">
+        <Input bootstrap="form-control" type="number" name="id_num" id="id_num" defaultValue={data?.id_num}>
           ID
         </Input>
 
-        <Input bootstrap="form-control" type="text" name="jobs" id="jobs">
+        <Input bootstrap="form-control" type="text" name="jobs" id="jobs" defaultValue={data ? (Array.isArray(data?.jobs) ? data?.jobs.join(",") : data?.jobs) : ""}>
           Treballs (separat per ",")
         </Input>
 
-        <Input bootstrap="form-control" type="text" name="image" id="image">
+        <Input bootstrap="form-control" type="text" name="image" id="image" defaultValue={data?.image}>
           Image URL
         </Input>
 
@@ -52,6 +52,7 @@ function MainCharacterForm({ show, data, submitHandler, toggleShow }: MainCharac
           name="description"
           id="description"
           rows={4}
+          defaultValue={data?.description}
         >
           Descripció
         </Textarea>
