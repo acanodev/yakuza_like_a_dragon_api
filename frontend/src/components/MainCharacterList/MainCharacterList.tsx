@@ -16,6 +16,7 @@ import List from "../List";
 import Modal from "../Modal";
 import MainCharacterModal from "../MainCharacterModal/MainCharacterModal";
 import MainCharacterForm from "../MainCharacterForm/MainCharacterForm";
+import Alert from "../Alert";
 
 type MainCharacterListProps = {
   switchList: (curList: ListType) => void;
@@ -169,12 +170,26 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
       </div>
 
       <Card headerText="Main Characters" id="mainCharacterList">
-        <List
-          content={allData ?? []}
-          showDetail={showDetail}
-          showEdit={showForm}
-          showDelete={showDelete}
-        ></List>
+        {allLoading && (
+          <Alert type="warning">
+            <i className="fa-solid fa-spinner fa-spin-pulse pe-2"></i> Carregant
+            Main Characters...
+          </Alert>
+        )}
+        {allError && (
+          <Alert>
+            <i className="fa-solid fa-square-xmark pe-2"></i> Error carregant
+            MainCharacters
+          </Alert>
+        )}
+        {allData && (
+          <List
+            content={allData ?? []}
+            showDetail={showDetail}
+            showEdit={showForm}
+            showDelete={showDelete}
+          ></List>
+        )}
       </Card>
 
       <MainCharacterModal
