@@ -4,6 +4,7 @@ import Card from "../Card";
 import Button from "../Button";
 import { useGetAxios } from "../../hooks/useAxios";
 import { usePostAxios } from "../../hooks/useAxios";
+import { usePutAxios } from "../../hooks/useAxios";
 import { useDeleteAxios } from "../../hooks/useAxios";
 import type {
   MainCharacter,
@@ -48,6 +49,12 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
     loading: uploading,
     error: postError,
   } = usePostAxios<MainCharacter, NewMainCharacter>();
+
+  const {
+    handlePut,
+    loading: updating,
+    error: putError,
+  } = usePutAxios<MainCharacter, NewMainCharacter>();
 
   const {
     handleDelete,
@@ -95,8 +102,22 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
     );
   };
 
-  const showEdit = (id: number) => {
-    console.log("Edit:", id);
+  const editMainCharacter = (data: any) => {
+    if (!selectedId) return;
+    
+    const url = `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}`;
+
+    handlePut(
+      url,
+      {
+        ...data,
+        description: data.description?.trim() || "Sin descripción",
+      },
+      () => {
+        closeForm();
+        setReloadURLKey((prev) => prev + 1);
+      },
+    );
   };
 
   const showDelete = (id: number) => {
@@ -151,7 +172,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
         <List
           content={allData ?? []}
           showDetail={showDetail}
-          showEdit={showEdit}
+          showEdit={showForm}
           showDelete={showDelete}
         ></List>
       </Card>
@@ -163,9 +184,11 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
       ></MainCharacterModal>
 
       <MainCharacterForm
+        key={current?.id_num ?? "new"}
         show={showMcForm}
+        data={current}
         toggleShow={closeForm}
-        submitHandler={createMainCharacter}
+        submitHandler={!current ? createMainCharacter : editMainCharacter}
       ></MainCharacterForm>
 
       <Modal
