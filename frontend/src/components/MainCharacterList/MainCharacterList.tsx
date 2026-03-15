@@ -104,7 +104,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
 
   const editMainCharacter = (data: any) => {
     if (!selectedId) return;
-    
+
     const url = `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}`;
 
     handlePut(
@@ -186,7 +186,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
       <MainCharacterForm
         key={current?.id_num ?? "new"}
         show={showMcForm}
-        data={current}
+        data={current ?? undefined}
         toggleShow={closeForm}
         submitHandler={!current ? createMainCharacter : editMainCharacter}
       ></MainCharacterForm>
