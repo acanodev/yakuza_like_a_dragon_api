@@ -25,4 +25,12 @@ module.exports = async (data, idToIgnore) => {
   if (isNaN(data.rarity) || data.rarity < 1) {
     return "Rarity must be a number greater than 0";
   }
+
+  if (data.image && typeof data.image === "string") {
+    try {
+      new URL(data.image);
+    } catch {
+      return "Invalid URL";
+    }
+  }
 };
