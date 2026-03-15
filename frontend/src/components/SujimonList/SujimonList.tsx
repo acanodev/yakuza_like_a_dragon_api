@@ -14,6 +14,7 @@ import Modal from "../Modal";
 import SujimonModal from "../SujimonModal/SujimonModal";
 import SujimonForm from "../SujimonForm/SujimonForm";
 import Alert from "../Alert";
+import { useAlert } from "../../hooks/useAlert";
 
 type SujimonListProps = {
   switchList: (curList: ListType) => void;
@@ -25,6 +26,8 @@ function SujimonList({ switchList }: SujimonListProps) {
   const [showSujimonForm, setShowSujimonForm] = useState<boolean>(false);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const { alert, success, error } = useAlert();
 
   const {
     data: allData,
@@ -59,6 +62,17 @@ function SujimonList({ switchList }: SujimonListProps) {
     loading: deleting,
     error: deleteError,
   } = useDeleteAxios<void>();
+
+  useEffect(() => {
+    const err = errorCurrent || postError || putError || deleteError;
+
+    if (err) {
+      closeDetail();
+      closeForm();
+      closeDelete();
+      error(err);
+    }
+  }, [errorCurrent, postError, putError, deleteError]);
 
   const showDetail = (id: number) => {
     setShowSujimonDetail(true);
@@ -95,6 +109,7 @@ function SujimonList({ switchList }: SujimonListProps) {
       },
       () => {
         closeForm();
+        success(`${data?.name} creat amb éxit!`);
         setReloadURLKey((prev) => prev + 1);
       },
     );
@@ -109,10 +124,11 @@ function SujimonList({ switchList }: SujimonListProps) {
       url,
       {
         ...data,
-        description: data.description?.trim() || "Sin descripción",
+        description: data.description?.trim() || "",
       },
       () => {
         closeForm();
+        success(`${data?.name} actualitzat amb éxit!`);
         setReloadURLKey((prev) => prev + 1);
       },
     );
@@ -134,9 +150,12 @@ function SujimonList({ switchList }: SujimonListProps) {
       return;
     }
 
+    const name = current?.name;
+
     const url = `${BASE_URL}/${SUJIMON_ENDPOINT}/${id}`;
     handleDelete(url, () => {
       closeDelete();
+      success(`${name} eliminat amb éxit!`);
       setReloadURLKey((prev) => prev + 1);
     });
   };
@@ -164,6 +183,12 @@ function SujimonList({ switchList }: SujimonListProps) {
           </Button>
         </div>
       </div>
+
+      {alert && (
+        <div className="container mt-5">
+          <Alert type={alert.type}>{alert.message}</Alert>
+        </div>
+      )}
 
       <Card headerText="Sujimon" id="sujimonList">
         {allLoading && (
