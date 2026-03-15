@@ -18,5 +18,13 @@ module.exports = async (data, idToIgnore) => {
     return "id_num must be unique";
   }
 
+  if (data.image && typeof data.image === "string") {
+    try {
+      new URL(data.image);
+    } catch {
+      return "Invalid URL";
+    }
+  }
+
   return null;
 };
