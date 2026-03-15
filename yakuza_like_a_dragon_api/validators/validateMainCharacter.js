@@ -1,8 +1,10 @@
 const mainCharacter = require("../models/Main_Character");
 
-module.exports = async (data) => {
+module.exports = async (data, idToIgnore) => {
   const mcs = await mainCharacter.find({});
-  const ids_num = mcs.map((el) => el.id_num);
+  const ids_num = mcs
+    .filter(el => el.id_num !== idToIgnore)
+    .map(el => el.id_num);
 
   if (!data.name || typeof data.name !== "string") {
     return "Name must be a string";
@@ -14,6 +16,14 @@ module.exports = async (data) => {
 
   if (ids_num.includes(Number(data.id_num))) {
     return "id_num must be unique";
+  }
+
+  if (data.image && typeof data.image === "string") {
+    try {
+      new URL(data.image);
+    } catch {
+      return "Invalid URL";
+    }
   }
 
   return null;

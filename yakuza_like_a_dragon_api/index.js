@@ -28,7 +28,7 @@ app.use(helmet());
 app.use(
   cors({
     origin: (origin, callback) => {
-      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5174"];
+      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"];
 
       if (!origin) return callback(null, true);
 
@@ -169,7 +169,7 @@ app.get("/api/main_characters/:id", async (request, response, next) => {
 app.post("/api/main_characters", async (request, response, next) => {
   const mc = request.body;
 
-  const error = await validateMainCharacter(mc);
+  const error = await validateMainCharacter(mc, undefined);
 
   if (error) {
     return response.status(400).json({
@@ -182,7 +182,7 @@ app.post("/api/main_characters", async (request, response, next) => {
     name: String(mc.name),
     id_num: Number(mc.id_num),
     jobs: mc.jobs ? mc.jobs.split(",") : [],
-    image: mc.image !== undefined ? String(mc.image) : null,
+    image: mc.image && mc.image.trim() !== "" ? String(mc.image) : null,
     description: mc.description !== undefined ? String(mc.description) : null,
   });
 
@@ -235,7 +235,7 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
   const id = request.params.id;
   const mc = request.body;
 
-  const error = await validateMainCharacter(mc);
+  const error = await validateMainCharacter(mc, Number(id));
 
   if (error) {
     return response.status(400).json({
@@ -248,7 +248,7 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
     name: String(mc.name),
     id_num: Number(mc.id_num),
     jobs: mc.jobs ? mc.jobs.split(",") : [],
-    image: mc.image !== undefined ? String(mc.image) : null,
+    image: mc.image && mc.image.trim() !== "" ? String(mc.image) : null,
     description: mc.description !== undefined ? String(mc.description) : null,
   };
 
@@ -267,7 +267,7 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
       });
     }
 
-    update ? response.json(updated) : next();
+    updated ? response.json(updated) : next();
   } catch (error) {
     next(error);
   }
@@ -410,7 +410,7 @@ app.get("/api/sujimon/:id", async (request, response, next) => {
 app.post("/api/sujimon", async (request, response, next) => {
   const sujimon = request.body;
 
-  const error = await validateSujimon(sujimon);
+  const error = await validateSujimon(sujimon, undefined);
 
   if (error) {
     return response.status(400).json({
@@ -430,7 +430,7 @@ app.post("/api/sujimon", async (request, response, next) => {
     skills: sujimon.skills ? sujimon.skills.split(",") : [],
     weaknesses: sujimon.weaknesses ? sujimon.weaknesses.split(",") : [],
     drops: sujimon.drops ? sujimon.drops.split(",") : [],
-    image: sujimon.image !== undefined ? String(sujimon.image) : null,
+    image: sujimon.image && sujimon.image.trim() !== "" ? String(sujimon.image) : null,
     description:
       sujimon.description !== undefined ? String(sujimon.description) : null,
   });
@@ -495,7 +495,7 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
   const id = request.params.id;
   const sujimon = request.body;
 
-  const error = await validateSujimon(sujimon);
+  const error = await validateSujimon(sujimon, Number(id));
 
   if (error) {
     return response.status(400).json({
@@ -515,7 +515,7 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
     skills: sujimon.skills ? sujimon.skills.split(",") : [],
     weaknesses: sujimon.weaknesses ? sujimon.weaknesses.split(",") : [],
     drops: sujimon.drops ? sujimon.drops.split(",") : [],
-    image: sujimon.image !== undefined ? String(sujimon.image) : null,
+    image: sujimon.image && sujimon.image.trim() !== "" ? String(sujimon.image) : null,
     description:
       sujimon.description !== undefined ? String(sujimon.description) : null,
   };
