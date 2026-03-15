@@ -28,7 +28,7 @@ function App() {
           </h1>
         </header>
 
-        <div className="mt-5">
+        <div className="mt-5 mb-5">
           {list === "mainCharacters" && (
             <MainCharacterList switchList={switchList}></MainCharacterList>
           )}
