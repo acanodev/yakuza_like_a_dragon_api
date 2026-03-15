@@ -17,6 +17,7 @@ import Modal from "../Modal";
 import MainCharacterModal from "../MainCharacterModal/MainCharacterModal";
 import MainCharacterForm from "../MainCharacterForm/MainCharacterForm";
 import Alert from "../Alert";
+import { useAlert } from "../../hooks/useAlert";
 
 type MainCharacterListProps = {
   switchList: (curList: ListType) => void;
@@ -28,6 +29,8 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
   const [showMcForm, setShowMcForm] = useState<boolean>(false);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number | null>(null);
+
+  const { alert, success, error } = useAlert();
 
   const {
     data: allData,
@@ -62,6 +65,17 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
     loading: deleting,
     error: deleteError,
   } = useDeleteAxios<void>();
+
+  useEffect(() => {
+    const err = errorCurrent || postError || putError || deleteError;
+
+    if (err) {
+      closeDetail();
+      closeForm();
+      closeDelete();
+      error(err);
+    }
+  }, [errorCurrent, postError, putError, deleteError]);
 
   const showDetail = (id: number) => {
     setShowMcDetail(true);
@@ -98,6 +112,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
       },
       () => {
         closeForm();
+        success(`${data?.name} creat amb éxit!`);
         setReloadURLKey((prev) => prev + 1);
       },
     );
@@ -112,10 +127,11 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
       url,
       {
         ...data,
-        description: data.description?.trim() || "Sin descripción",
+        description: data.description?.trim() || "",
       },
       () => {
         closeForm();
+        success(`${data?.name} actualitzat amb éxit!`);
         setReloadURLKey((prev) => prev + 1);
       },
     );
@@ -137,9 +153,12 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
       return;
     }
 
+    const name = current?.name;
+
     const url = `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${id}`;
     handleDelete(url, () => {
       closeDelete();
+      success(`${name} eliminat amb éxit!`);
       setReloadURLKey((prev) => prev + 1);
     });
   };
@@ -169,6 +188,12 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
         </div>
       </div>
 
+      {alert && (
+        <div className="container mt-5">
+          <Alert type={alert.type}>{alert.message}</Alert>
+        </div>
+      )}
+
       <Card headerText="Main Characters" id="mainCharacterList">
         {allLoading && (
           <Alert type="warning">
@@ -179,7 +204,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
         {allError && (
           <Alert>
             <i className="fa-solid fa-square-xmark pe-2"></i> Error carregant
-            MainCharacters
+            MainCharacters! {allError}
           </Alert>
         )}
         {allData && (
