@@ -182,7 +182,7 @@ app.post("/api/main_characters", async (request, response, next) => {
     name: String(mc.name),
     id_num: Number(mc.id_num),
     jobs: mc.jobs ? mc.jobs.split(",") : [],
-    image: mc.image !== undefined ? String(mc.image) : null,
+    image: mc.image && mc.image.trim() !== "" ? String(mc.image) : null,
     description: mc.description !== undefined ? String(mc.description) : null,
   });
 
@@ -248,7 +248,7 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
     name: String(mc.name),
     id_num: Number(mc.id_num),
     jobs: mc.jobs ? mc.jobs.split(",") : [],
-    image: mc.image !== undefined ? String(mc.image) : null,
+    image: mc.image && mc.image.trim() !== "" ? String(mc.image) : null,
     description: mc.description !== undefined ? String(mc.description) : null,
   };
 
@@ -430,7 +430,7 @@ app.post("/api/sujimon", async (request, response, next) => {
     skills: sujimon.skills ? sujimon.skills.split(",") : [],
     weaknesses: sujimon.weaknesses ? sujimon.weaknesses.split(",") : [],
     drops: sujimon.drops ? sujimon.drops.split(",") : [],
-    image: sujimon.image !== undefined ? String(sujimon.image) : null,
+    image: sujimon.image && sujimon.image.trim() !== "" ? String(sujimon.image) : null,
     description:
       sujimon.description !== undefined ? String(sujimon.description) : null,
   });
@@ -515,7 +515,7 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
     skills: sujimon.skills ? sujimon.skills.split(",") : [],
     weaknesses: sujimon.weaknesses ? sujimon.weaknesses.split(",") : [],
     drops: sujimon.drops ? sujimon.drops.split(",") : [],
-    image: sujimon.image !== undefined ? String(sujimon.image) : null,
+    image: sujimon.image && sujimon.image.trim() !== "" ? String(sujimon.image) : null,
     description:
       sujimon.description !== undefined ? String(sujimon.description) : null,
   };
