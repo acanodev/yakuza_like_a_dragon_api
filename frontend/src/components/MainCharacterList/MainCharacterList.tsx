@@ -93,7 +93,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
       url,
       {
         ...data,
-        description: data.description?.trim() || "Sin descripción",
+        description: data.description?.trim() || "",
       },
       () => {
         closeForm();

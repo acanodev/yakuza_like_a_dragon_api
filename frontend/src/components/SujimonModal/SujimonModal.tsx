@@ -37,15 +37,33 @@ function SujimonModal({ show, data, toggleShow }: SujimonModalProps) {
       >
         {data && (
           <div className="text-center">
-            <img src={data.image} alt="" className="mb-3" />
-            {detailFields.map(({ label, field }) => (
-              <p key={field}>
-                <strong>{label}:</strong>{" "}
-                {Array.isArray(data[field])
-                  ? data[field].join(", ") || "-"
-                  : data[field]}
-              </p>
-            ))}
+            {data.image && (
+              <img src={data.image} alt={data.name} className="mb-3" />
+            )}
+
+            {detailFields.map(({ label, field }) => {
+              const value = data[field];
+
+              let displayValue;
+
+              if (Array.isArray(value)) {
+                displayValue = value.length >= 1 ? value.join(", ") : "-";
+              } else if (
+                value === null ||
+                value === undefined ||
+                value === ""
+              ) {
+                displayValue = "-";
+              } else {
+                displayValue = value;
+              }
+
+              return (
+                <p key={field}>
+                  <strong>{label}:</strong> {displayValue}
+                </p>
+              );
+            })}
           </div>
         )}
       </Modal>
