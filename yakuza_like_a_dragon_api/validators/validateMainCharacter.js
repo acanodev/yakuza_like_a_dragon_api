@@ -18,12 +18,20 @@ module.exports = async (data, idToIgnore) => {
     return "id_num must be unique";
   }
 
+  if (data.jobs && typeof data.jobs !== "string") {
+    return "Drops must be sended as string";
+  }
+
   if (data.image && typeof data.image === "string") {
     try {
       new URL(data.image);
     } catch {
       return "Invalid URL";
     }
+  }
+
+  if (data.description && typeof data.description !== "string") {
+    return "Description must be a string";
   }
 
   return null;
