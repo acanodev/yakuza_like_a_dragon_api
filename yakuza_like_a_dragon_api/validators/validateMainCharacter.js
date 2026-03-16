@@ -6,8 +6,8 @@ module.exports = async (data, idToIgnore) => {
     .filter((el) => el.id_num !== idToIgnore)
     .map((el) => el.id_num);
 
-  if (!data.name || typeof data.name !== "string") {
-    return "Name must be a string";
+  if (!data.name || typeof data.name !== "string" || data.name.trim() === "") {
+    return "Name must be a string and not empty";
   }
 
   if (isNaN(data.id_num) || data.id_num < 1) {
@@ -19,7 +19,7 @@ module.exports = async (data, idToIgnore) => {
   }
 
   if (data.jobs && (typeof data.jobs !== "string" || data.jobs.trim() === "")) {
-    return "Drops must be sended as string";
+    return "Jobs must be sended as string or undefined";
   }
 
   if (data.image && typeof data.image === "string") {
