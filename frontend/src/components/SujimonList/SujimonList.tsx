@@ -39,7 +39,7 @@ function SujimonList({ switchList }: SujimonListProps) {
 
   const {
     data: current,
-    loading: loadingCurrent,
+    loading: _loadingCurrent,
     error: errorCurrent,
   } = useGetAxios<Sujimon>(
     selectedId ? `${BASE_URL}/${SUJIMON_ENDPOINT}/${selectedId}` : null,
@@ -47,19 +47,19 @@ function SujimonList({ switchList }: SujimonListProps) {
 
   const {
     handlePost,
-    loading: uploading,
+    loading: _uploading,
     error: postError,
   } = usePostAxios<Sujimon, NewSujimon>();
 
   const {
     handlePut,
-    loading: updating,
+    loading: _updating,
     error: putError,
   } = usePutAxios<Sujimon, NewSujimon>();
 
   const {
     handleDelete,
-    loading: deleting,
+    loading: _deleting,
     error: deleteError,
   } = useDeleteAxios<void>();
 

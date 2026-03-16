@@ -42,7 +42,7 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
 
   const {
     data: current,
-    loading: loadingCurrent,
+    loading: _loadingCurrent,
     error: errorCurrent,
   } = useGetAxios<MainCharacter>(
     selectedId ? `${BASE_URL}/${MAIN_CHARACTERS_ENDPOINT}/${selectedId}` : null,
@@ -50,19 +50,19 @@ function MainCharacterList({ switchList }: MainCharacterListProps) {
 
   const {
     handlePost,
-    loading: uploading,
+    loading: _uploading,
     error: postError,
   } = usePostAxios<MainCharacter, NewMainCharacter>();
 
   const {
     handlePut,
-    loading: updating,
+    loading: _updating,
     error: putError,
   } = usePutAxios<MainCharacter, NewMainCharacter>();
 
   const {
     handleDelete,
-    loading: deleting,
+    loading: _deleting,
     error: deleteError,
   } = useDeleteAxios<void>();
 
