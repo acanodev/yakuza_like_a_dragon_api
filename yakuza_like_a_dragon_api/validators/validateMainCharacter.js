@@ -3,8 +3,8 @@ const mainCharacter = require("../models/Main_Character");
 module.exports = async (data, idToIgnore) => {
   const mcs = await mainCharacter.find({});
   const ids_num = mcs
-    .filter(el => el.id_num !== idToIgnore)
-    .map(el => el.id_num);
+    .filter((el) => el.id_num !== idToIgnore)
+    .map((el) => el.id_num);
 
   if (!data.name || typeof data.name !== "string") {
     return "Name must be a string";
@@ -18,7 +18,7 @@ module.exports = async (data, idToIgnore) => {
     return "id_num must be unique";
   }
 
-  if (data.jobs && typeof data.jobs !== "string") {
+  if (data.jobs && (typeof data.jobs !== "string" || data.jobs.trim() === "")) {
     return "Drops must be sended as string";
   }
 
