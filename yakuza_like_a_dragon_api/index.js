@@ -28,7 +28,8 @@ app.use(helmet());
 app.use(
   cors({
     origin: (origin, callback) => {
-      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"];
+      // const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"]; // For dev
+      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8080"]; // For Docker
 
       if (!origin) return callback(null, true);
 
@@ -580,6 +581,6 @@ app.delete("/api/sujimon/:id", async (request, response, next) => {
 app.use(handleErrors);
 app.use(notFound);
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
 });

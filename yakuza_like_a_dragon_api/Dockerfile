@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3001
 
-CMD npm run seed && node dist/index.js
+CMD npm run seed && npm start
