@@ -28,8 +28,8 @@ app.use(helmet());
 app.use(
   cors({
     origin: (origin, callback) => {
-      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"]; // For dev
-      // const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8080"]; // For Docker
+      // const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"]; // For dev
+      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8080"]; // For Docker
 
       if (!origin) return callback(null, true);
 
