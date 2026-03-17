@@ -7,6 +7,8 @@ import Button from "../Button";
 import type { z } from "zod";
 import { mainCharacterSchema } from "../../schemas/mainCharacter";
 import type { MainCharacter } from "../../types/Main_Character";
+import Checkbox from "../Checkbox";
+import { formattedDate } from "../../helpers/formattedDate";
 
 type MainCharacterFormData = z.input<typeof mainCharacterSchema>;
 
@@ -23,6 +25,7 @@ function MainCharacterForm({
   submitHandler,
   toggleShow,
 }: MainCharacterFormProps) {
+
   return (
     <Modal
       show={show}
@@ -48,6 +51,16 @@ function MainCharacterForm({
 
         <Input
           bootstrap="form-control"
+          type="date"
+          name="birth_date"
+          id="birth_date"
+          defaultValue={data?.birth_date ? formattedDate(data.birth_date) : ""}
+        >
+          Data de naixement
+        </Input>
+
+        <Input
+          bootstrap="form-control"
           type="number"
           name="id_num"
           id="id_num"
@@ -62,9 +75,7 @@ function MainCharacterForm({
           name="jobs"
           id="jobs"
           defaultValue={
-            Array.isArray(data?.jobs)
-              ? data.jobs.join(",")
-              : (data?.jobs ?? "")
+            Array.isArray(data?.jobs) ? data.jobs.join(",") : (data?.jobs ?? "")
           }
         >
           Treballs (separat per ",")
@@ -89,6 +100,15 @@ function MainCharacterForm({
         >
           Descripció
         </Textarea>
+
+        <Checkbox
+          bootstrap="form-check-input"
+          name="isPlayable"
+          id="isPlayable"
+          defaultChecked={data?.isPlayable ? true : false}
+        >
+          <span className="form-check-label">Personatge jugable</span>
+        </Checkbox>
 
         <Button bootstrap="btn btn-success" type="submit">
           {!data ? "Afegir" : "Editar"}

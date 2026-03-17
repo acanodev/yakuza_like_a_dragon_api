@@ -16,3 +16,7 @@
     color: white;
     background-color: #2b0107;
 }
+
+.text-danger {
+    color: gold !important;
+}

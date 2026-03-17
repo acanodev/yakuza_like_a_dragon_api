@@ -34,5 +34,13 @@ module.exports = async (data, idToIgnore) => {
     return "Description must be a string";
   }
 
+  if (data.birth_date && isNaN(Date.parse(data.birth_date))) {
+    return "Invalid birth_date format";
+  }
+
+  if (data.isPlayable !== undefined && typeof data.isPlayable !== "boolean") {
+    return "isPlayable must be a boolean";
+  }
+
   return null;
 };
