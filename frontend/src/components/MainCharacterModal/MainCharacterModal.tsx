@@ -1,6 +1,7 @@
 import Modal from "../Modal";
 import "./MainCharacterModal.css";
 import type { MainCharacter } from "../../types/Main_Character";
+import { formattedDate } from "../../helpers/formattedDate";
 
 type MainCharacterModalProps = {
   show: boolean;
@@ -49,6 +50,8 @@ function MainCharacterModal({
 
             if (Array.isArray(value)) {
               displayValue = value.length >= 1 ? value.join(", ") : "-";
+            } else if (field === "birth_date" && typeof value === "string") {
+              displayValue = value ? formattedDate(value) : "-";
             } else if (field === "isPlayable") {
               displayValue = value ? "✅" : "❌";
             } else if (value === null || value === undefined || value === "") {
