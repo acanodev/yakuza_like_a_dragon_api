@@ -20,5 +20,5 @@ export const mainCharacterSchema = z.object({
     .string()
     .optional()
     .refine((val) => !val || !isNaN(Date.parse(val))),
-  isPlayable: z.boolean().optional(),
+  isPlayable: z.coerce.boolean().optional(),
 });
