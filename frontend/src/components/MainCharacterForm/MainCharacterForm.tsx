@@ -61,16 +61,6 @@ function MainCharacterForm({
 
         <Input
           bootstrap="form-control"
-          type="number"
-          name="id_num"
-          id="id_num"
-          defaultValue={data?.id_num ?? ""}
-        >
-          ID
-        </Input>
-
-        <Input
-          bootstrap="form-control"
           type="text"
           name="jobs"
           id="jobs"

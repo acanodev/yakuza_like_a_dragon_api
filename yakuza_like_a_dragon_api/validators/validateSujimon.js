@@ -1,10 +1,23 @@
 const sujimon = require("../models/Sujimon");
 
 module.exports = async (data, idToIgnore) => {
+
+  let idNumToIgnore = null;
+
+  if (!isNaN(idToIgnore)) {
+    idNumToIgnore = Number(idToIgnore);
+  } else if (idToIgnore) {
+    const existing = await sujimon.findById(idToIgnore);
+    if (existing) {
+      idNumToIgnore = existing.id_num;
+    }
+  }
+
   const sujimons = await sujimon.find({});
   const ids_num = sujimons
-    .filter((el) => el.id_num !== idToIgnore)
+    .filter((el) => el.id_num !== idNumToIgnore)
     .map((el) => el.id_num);
+
 
   if (!data.name || typeof data.name !== "string" || data.name.trim() === "") {
     return "Name must be a string and not empty";

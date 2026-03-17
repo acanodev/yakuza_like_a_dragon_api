@@ -28,8 +28,7 @@ app.use(helmet());
 app.use(
   cors({
     origin: (origin, callback) => {
-      // const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"]; // For dev
-      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8080"]; // For Docker
+      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173", "http://localhost:8080"];
 
       if (!origin) return callback(null, true);
 
@@ -156,9 +155,6 @@ app.get("/api/main_characters/:id", async (request, response, next) => {
  *             properties:
  *               name:
  *                 type: string
- *               id_num:
- *                 type: integer
- *                 default: 1
  *               jobs:
  *                 type: string
  *               image:
@@ -182,7 +178,7 @@ app.get("/api/main_characters/:id", async (request, response, next) => {
 app.post("/api/main_characters", async (request, response, next) => {
   const mc = request.body;
 
-  const error = await validateMainCharacter(mc, undefined);
+  const error = await validateMainCharacter(mc);
 
   if (error) {
     return response.status(400).json({
@@ -191,9 +187,12 @@ app.post("/api/main_characters", async (request, response, next) => {
     });
   }
 
+  const lastMC = await mainCharacter.findOne().sort({ id_num: -1 });
+  const newId = lastMC ? lastMC.id_num + 1 : 1;
+
   const newMC = new mainCharacter({
     name: String(mc.name),
-    id_num: Number(mc.id_num),
+    id_num: newId,
     jobs: mc.jobs ? mc.jobs.split(",") : [],
     image: mc.image && mc.image.trim() !== "" ? String(mc.image) : null,
     description: mc.description !== undefined ? String(mc.description) : null,
@@ -229,9 +228,6 @@ app.post("/api/main_characters", async (request, response, next) => {
  *             properties:
  *               name:
  *                 type: string
- *               id_num:
- *                 type: integer
- *                 default: 1
  *               jobs:
  *                 type: string
  *               image:
@@ -258,7 +254,7 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
   const id = request.params.id;
   const mc = request.body;
 
-  const error = await validateMainCharacter(mc, Number(id));
+  const error = await validateMainCharacter(mc);
 
   if (error) {
     return response.status(400).json({
@@ -269,7 +265,6 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
 
   const updatedData = {
     name: String(mc.name),
-    id_num: Number(mc.id_num),
     jobs: mc.jobs ? mc.jobs.split(",") : [],
     image: mc.image && mc.image.trim() !== "" ? String(mc.image) : null,
     description: mc.description !== undefined ? String(mc.description) : null,
@@ -533,7 +528,7 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
   const id = request.params.id;
   const sujimon = request.body;
 
-  const error = await validateSujimon(sujimon, Number(id));
+  const error = await validateSujimon(sujimon, id);
 
   if (error) {
     return response.status(400).json({
