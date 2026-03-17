@@ -3,16 +3,20 @@ export type MainCharacter = {
   name: string;
   id_num: number;
   jobs: string[];
-  image: string;
-  description: string;
+  image: string | null;
+  description: string | null;
+  birth_date: string | null;
+  isPlayable: boolean;
 };
 
 export type NewMainCharacter = {
   name: string;
   id_num: number;
   jobs: string[];
-  image: string;
-  description: string;
+  image: string | null;
+  description: string | null;
+  birth_date: string | null;
+  isPlayable?: boolean;
 };
 
 export type MainCharacterFormProps = {
