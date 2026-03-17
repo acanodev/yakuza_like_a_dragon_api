@@ -28,8 +28,8 @@ app.use(helmet());
 app.use(
   cors({
     origin: (origin, callback) => {
-      // const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"]; // For dev
-      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8080"]; // For Docker
+      const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"]; // For dev
+      // const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8080"]; // For Docker
 
       if (!origin) return callback(null, true);
 
@@ -54,13 +54,13 @@ const options = {
     tags: [
       {
         name: "Main Characters",
-        description: "Endpoints related to main characters"
+        description: "Endpoints related to main characters",
       },
       {
         name: "Sujimon",
-        description: "Endpoints related to sujimon"
-      }
-    ]
+        description: "Endpoints related to sujimon",
+      },
+    ],
   },
   apis: ["./index.js"],
 };
@@ -76,8 +76,8 @@ app.get("/", (req, res) => {
     documentation: `${process.env.HOST}:${process.env.PORT}/api-docs`,
     endpoints: {
       mainCharacters: `${process.env.HOST}:${process.env.PORT}/api/main_characters`,
-      sujimon: `${process.env.HOST}:${process.env.PORT}/api/sujimon`
-    }
+      sujimon: `${process.env.HOST}:${process.env.PORT}/api/sujimon`,
+    },
   });
 });
 
@@ -92,6 +92,8 @@ app.get("/", (req, res) => {
  *     responses:
  *       200:
  *         description: List of characters
+ *       500:
+ *         description: Internal Server Error
  */
 app.get("/api/main_characters", async (request, response, next) => {
   try {
@@ -118,6 +120,8 @@ app.get("/api/main_characters", async (request, response, next) => {
  *         description: Character found
  *       404:
  *         description: Character not found
+ *       500:
+ *         description: Internal Server Error
  */
 app.get("/api/main_characters/:id", async (request, response, next) => {
   try {
@@ -161,11 +165,19 @@ app.get("/api/main_characters/:id", async (request, response, next) => {
  *                 type: string
  *               description:
  *                 type: string
+ *               birth_date:
+ *                 type: string
+ *                 format: date
+ *                 example: "1985-03-15"
+ *               isPlayable:
+ *                 type: boolean
  *     responses:
  *       200:
  *         description: Character created
  *       400:
  *         description: Bad request
+ *       500:
+ *         description: Internal Server Error
  */
 app.post("/api/main_characters", async (request, response, next) => {
   const mc = request.body;
@@ -185,6 +197,8 @@ app.post("/api/main_characters", async (request, response, next) => {
     jobs: mc.jobs ? mc.jobs.split(",") : [],
     image: mc.image && mc.image.trim() !== "" ? String(mc.image) : null,
     description: mc.description !== undefined ? String(mc.description) : null,
+    birth_date: mc.birth_date ? new Date(mc.birth_date) : null,
+    isPlayable: mc.isPlayable === true || mc.isPlayable === "true",
   });
 
   try {
@@ -224,6 +238,12 @@ app.post("/api/main_characters", async (request, response, next) => {
  *                 type: string
  *               description:
  *                 type: string
+ *               birth_date:
+ *                 type: string
+ *                 format: date
+ *                 example: "1985-03-15"
+ *               isPlayable:
+ *                 type: boolean
  *     responses:
  *       200:
  *         description: Character found
@@ -231,6 +251,8 @@ app.post("/api/main_characters", async (request, response, next) => {
  *         description: Character not found
  *       400:
  *         description: Bad request
+ *       500:
+ *         description: Internal Server Error
  */
 app.put("/api/main_characters/:id", async (request, response, next) => {
   const id = request.params.id;
@@ -251,6 +273,8 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
     jobs: mc.jobs ? mc.jobs.split(",") : [],
     image: mc.image && mc.image.trim() !== "" ? String(mc.image) : null,
     description: mc.description !== undefined ? String(mc.description) : null,
+    birth_date: mc.birth_date ? new Date(mc.birth_date) : null,
+    isPlayable: mc.isPlayable === true || mc.isPlayable === "true",
   };
 
   try {
@@ -292,6 +316,8 @@ app.put("/api/main_characters/:id", async (request, response, next) => {
  *        description: No content. Main character deleted successfully!
  *      404:
  *        description: Main character not found
+ *      500:
+ *        description: Internal Server Error
  */
 app.delete("/api/main_characters/:id", async (request, response, next) => {
   const id = request.params.id;
@@ -321,6 +347,8 @@ app.delete("/api/main_characters/:id", async (request, response, next) => {
  *     responses:
  *       200:
  *         description: List of sujimon
+ *       500:
+ *         description: Internal Server Error
  */
 app.get("/api/sujimon", async (request, response, next) => {
   try {
@@ -348,6 +376,8 @@ app.get("/api/sujimon", async (request, response, next) => {
  *         description: Sujimon found
  *       404:
  *         description: Sujimon not found
+ *       500:
+ *         description: Internal Server Error
  */
 app.get("/api/sujimon/:id", async (request, response, next) => {
   try {
@@ -407,6 +437,8 @@ app.get("/api/sujimon/:id", async (request, response, next) => {
  *         description: Character created
  *       400:
  *         description: Bad request
+ *       500:
+ *         description: Internal Server Error
  */
 app.post("/api/sujimon", async (request, response, next) => {
   const sujimon = request.body;
@@ -431,7 +463,10 @@ app.post("/api/sujimon", async (request, response, next) => {
     skills: sujimon.skills ? sujimon.skills.split(",") : [],
     weaknesses: sujimon.weaknesses ? sujimon.weaknesses.split(",") : [],
     drops: sujimon.drops ? sujimon.drops.split(",") : [],
-    image: sujimon.image && sujimon.image.trim() !== "" ? String(sujimon.image) : null,
+    image:
+      sujimon.image && sujimon.image.trim() !== ""
+        ? String(sujimon.image)
+        : null,
     description:
       sujimon.description !== undefined ? String(sujimon.description) : null,
   });
@@ -491,6 +526,8 @@ app.post("/api/sujimon", async (request, response, next) => {
  *         description: Sujimon not found
  *       400:
  *         description: Bad request
+ *       500:
+ *         description: Internal Server Error
  */
 app.put("/api/sujimon/:id", async (request, response, next) => {
   const id = request.params.id;
@@ -516,7 +553,10 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
     skills: sujimon.skills ? sujimon.skills.split(",") : [],
     weaknesses: sujimon.weaknesses ? sujimon.weaknesses.split(",") : [],
     drops: sujimon.drops ? sujimon.drops.split(",") : [],
-    image: sujimon.image && sujimon.image.trim() !== "" ? String(sujimon.image) : null,
+    image:
+      sujimon.image && sujimon.image.trim() !== ""
+        ? String(sujimon.image)
+        : null,
     description:
       sujimon.description !== undefined ? String(sujimon.description) : null,
   };
@@ -560,6 +600,8 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
  *        description: No content. Sujimon deleted successfully!
  *      404:
  *        description: Sujimon not found
+ *      500:
+ *        description: Internal Server Error
  */
 app.delete("/api/sujimon/:id", async (request, response, next) => {
   const id = request.params.id;
