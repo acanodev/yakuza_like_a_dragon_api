@@ -8,6 +8,7 @@ const mainCharacterSchema = new Schema(
     },
     id_num: {
       type: Number,
+      unique: true,
       required: true,
     },
     jobs: {
