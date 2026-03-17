@@ -16,8 +16,10 @@ type DetailField = {
 const detailFields: DetailField[] = [
   { label: "ID", field: "id_num" },
   { label: "Nom", field: "name" },
+  { label: "Data de naixement", field: "birth_date" },
   { label: "Treballs", field: "jobs" },
   { label: "Descripció", field: "description" },
+  { label: "Personatge jugable", field: "isPlayable" }
 ];
 
 function MainCharacterModal({
@@ -47,6 +49,8 @@ function MainCharacterModal({
 
             if (Array.isArray(value)) {
               displayValue = value.length >= 1 ? value.join(", ") : "-";
+            } else if (field === "isPlayable") {
+              displayValue = value ? "✅" : "❌";
             } else if (value === null || value === undefined || value === "") {
               displayValue = "-";
             } else {
