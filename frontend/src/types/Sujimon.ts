@@ -8,8 +8,8 @@ export type Sujimon = {
   skills: string[];
   weaknesses: string[];
   drops: string[];
-  image: string;
-  description: string;
+  image: string | null;
+  description: string | null;
 };
 
 export type NewSujimon = {
@@ -21,8 +21,8 @@ export type NewSujimon = {
   skills: string[];
   weaknesses: string[];
   drops: string[];
-  image: string;
-  description: string;
+  image: string | null;
+  description: string | null;
 };
 
 export type SujimonFormProps = {
