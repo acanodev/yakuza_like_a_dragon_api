@@ -7,6 +7,7 @@ import Button from "../Button";
 import type { z } from "zod";
 import { mainCharacterSchema } from "../../schemas/mainCharacter";
 import type { MainCharacter } from "../../types/Main_Character";
+import Checkbox from "../Checkbox";
 
 type MainCharacterFormData = z.input<typeof mainCharacterSchema>;
 
@@ -23,6 +24,16 @@ function MainCharacterForm({
   submitHandler,
   toggleShow,
 }: MainCharacterFormProps) {
+  const formattedDate = (date?: string) => {
+    if (!date) return "";
+    const d = new Date(date); // Data que arriba des de data
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0"); // getMonth per defecte comença des de 0. Per tant hem de sumar 1.
+    // padStart serveix per afegir un 0 al inici en cas de que el número tingui menys de dos caràcters. Març (3) -> 03.
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  };
+
   return (
     <Modal
       show={show}
@@ -48,6 +59,16 @@ function MainCharacterForm({
 
         <Input
           bootstrap="form-control"
+          type="date"
+          name="birth_date"
+          id="birth_date"
+          defaultValue={data?.birth_date ? formattedDate(data.birth_date) : ""}
+        >
+          Data de naixement
+        </Input>
+
+        <Input
+          bootstrap="form-control"
           type="number"
           name="id_num"
           id="id_num"
@@ -62,9 +83,7 @@ function MainCharacterForm({
           name="jobs"
           id="jobs"
           defaultValue={
-            Array.isArray(data?.jobs)
-              ? data.jobs.join(",")
-              : (data?.jobs ?? "")
+            Array.isArray(data?.jobs) ? data.jobs.join(",") : (data?.jobs ?? "")
           }
         >
           Treballs (separat per ",")
@@ -89,6 +108,15 @@ function MainCharacterForm({
         >
           Descripció
         </Textarea>
+
+        <Checkbox
+          bootstrap="form-check-input"
+          name="isPlayable"
+          id="isPlayable"
+          defaultChecked={data?.isPlayable ? true : false}
+        >
+          <span className="form-check-label">Personatge jugable</span>
+        </Checkbox>
 
         <Button bootstrap="btn btn-success" type="submit">
           {!data ? "Afegir" : "Editar"}
