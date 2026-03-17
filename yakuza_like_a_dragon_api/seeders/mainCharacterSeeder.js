@@ -20,6 +20,8 @@ async function seedMainCharacters() {
         "https://preview.redd.it/whats-one-thing-you-hate-about-ichiban-kasuga-v0-4i9d5cufs9tc1.jpeg?auto=webp&s=7869dc53634b49f68b8a671daf26dbdfddb06f6f",
       description: "Ex member from the Arakawa Family",
       __v: 0,
+      birth_date: "1977-01-01",
+      isPlayable: true,
     },
     {
       _id: "69b33e19de6207432c830a56",
@@ -30,6 +32,8 @@ async function seedMainCharacters() {
         "https://static.wikia.nocookie.net/yakuza/images/7/70/Kouichi_Adachi_02.jpg/revision/latest/scale-to-width-down/1000?cb=20190916084415",
       description: "Ex police officer",
       __v: 0,
+      birth_date: "1960-09-30",
+      isPlayable: true,
     },
     {
       _id: "69b33fb3de6207432c830a61",
@@ -40,6 +44,8 @@ async function seedMainCharacters() {
         "https://static.wikia.nocookie.net/yakuza/images/e/ee/YLAD_-_Character_Profile_-_Yu_Nanba.png/revision/latest/scale-to-width-down/1000?cb=20211225215017",
       description: "",
       __v: 0,
+      birth_date: "1978-02-01",
+      isPlayable: true,
     },
     {
       _id: "69b3408cde6207432c830a66",
@@ -50,6 +56,8 @@ async function seedMainCharacters() {
         "https://static.wikia.nocookie.net/yakuza/images/5/51/YLAD_-_Character_Profile_-_Saeko_Mukoda.png/revision/latest/scale-to-width-down/1000?cb=20211225220025",
       description: "",
       __v: 0,
+      birth_date: "1991-07-29",
+      isPlayable: true,
     },
     {
       _id: "69b341f2de6207432c830a6c",
@@ -60,6 +68,8 @@ async function seedMainCharacters() {
         "https://i.redd.it/whos-the-better-joon-gi-han-v0-dw4cv0oothbg1.jpg?width=1920&format=pjpg&auto=webp&s=1b7a2a92de66739c5697a189894a3516b794c0b2",
       description: "",
       __v: 0,
+      birth_date: "1986-09-03",
+      isPlayable: true,
     },
     {
       _id: "69b6adb3d040b007cc2ab2eb",
@@ -70,6 +80,8 @@ async function seedMainCharacters() {
         "https://static.wikia.nocookie.net/yakuza/images/f/f9/YLAD_-_Character_Profile_-_Tianyou_Zhao.png/revision/latest/scale-to-width-down/1000?cb=20230605125251",
       description: "",
       __v: 0,
+      birth_date: "1983-07-27",
+      isPlayable: true,
     },
   ];
 
