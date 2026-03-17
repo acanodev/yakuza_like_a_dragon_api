@@ -5,7 +5,6 @@ export const mainCharacterSchema = z.object({
     .string()
     .min(1)
     .transform((val) => (val.trim() === "" ? undefined : val)),
-  id_num: z.coerce.number().int().positive(),
   jobs: z
     .string()
     .optional()
