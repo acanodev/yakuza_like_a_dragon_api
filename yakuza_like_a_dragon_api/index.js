@@ -529,7 +529,7 @@ app.put("/api/sujimon/:id", async (request, response, next) => {
   const id = request.params.id;
   const sujimon = request.body;
 
-  const error = await validateSujimon(sujimon, Number(id));
+  const error = await validateSujimon(sujimon, id);
 
   if (error) {
     return response.status(400).json({
