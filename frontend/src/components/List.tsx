@@ -17,7 +17,12 @@ function List({ content, showDetail, showDelete, showEdit }: ListProps) {
         <li key={el.id_num} className="ms-1">
           <Card headerText={undefined} id={undefined}>
             <div className="text-center">
-              <img src={el.image} alt="" />
+              {el.image && (
+                <img src={el.image} alt="" />
+              )}
+              {!el.image && (
+                <img src="../assets/no-image.png" alt="" />
+              )}
               <h2 className="el-name mt-2">{el.name}</h2>
 
               {"category" in el && (
