@@ -1,6 +1,8 @@
+import React from "react";
+
 type AlertProps = {
     type?: string;
-    children: any;
+    children: React.ReactNode;
 }
 
 function Alert({ type = "danger", children } : AlertProps) {
