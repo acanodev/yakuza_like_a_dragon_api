@@ -15,6 +15,7 @@
   - [👁️ Mostrar detall de l'element](#-mostrar-detall-de-lelement)
   - [✏️ Editar element](#-editar-element)
   - [🚮 Eliminar element](#-eliminar-element)
+  - [🔁 Canviar de llista](#-canviar-de-llistat)
 - [🔌 Endpoints de l'API](#-endpoints-de-lapi)
 - [👤 Autor](#-autor)
 
@@ -543,6 +544,37 @@ Clicant el botó de "Canviar de llistat" podem alternar entre els Main Character
 <a id="-endpoints-de-lapi"></a>
 
 ## 🔌 Endpoints de l'API
+
+### 📌 Informació General
+
+Tots els endpoints estan prefixats amb `/api` i retornen respostes en format JSON.
+
+- **URL Base (Local i Docker):** [`http://localhost:3001`](http://localhost:3001)
+- **Documentació Swagger:** [`/api-docs`](http://localhost:3001/api-docs)
+
+---
+
+### Main Characters
+- GET /api/main_characters → Obtener todos
+- GET /api/main_characters/{id} → Obtener uno
+- POST /api/main_characters → Crear
+- PUT /api/main_characters/{id} → Actualizar
+- DELETE /api/main_characters/{id} → Eliminar
+
+### Sujimon
+- GET /api/sujimon
+- GET /api/sujimon/{id}
+- POST /api/sujimon
+- PUT /api/sujimon/{id}
+- DELETE /api/sujimon/{id}
+
+---
+
+### Eines
+
+- [Postman](https://www.postman.com/)
+- [`curl`](https://curl.se/)
+- [Documentació Swagger](http://localhost:3001/api-docs) (integrada al repositori i especifica de l'API, **recomanda**)
 
 ---
 
