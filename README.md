@@ -530,7 +530,7 @@ Si tot surt bé, el personatge s'haurà eliminat del llistat i serem notificats:
 
 ![alt text](readme_src/19.png)
 
-<a id="-canviar-llistat">
+<a id="-canviar-llistat"></a>
 
 ### 🔁 Canviar de llistat
 
