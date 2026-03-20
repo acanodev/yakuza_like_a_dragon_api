@@ -281,18 +281,7 @@ HOST=http://localhost
 PORT=3001
 ```
 
-### 4. Canviar origen del frontend a `index.js`
-
-Modifiquem el següent fragment del fitxer:
-
-```javascript
-const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"]; // For dev
-//const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8080"]; // For Docker
-```
-
-D'aquesta forma les peticions des de la maetixa API i el frontend seràn admesses.
-
-### 5. Instal·lar dependències del Frontend
+### 4. Instal·lar dependències del Frontend
 
 Ens situem al directori `frontend`
 
@@ -301,17 +290,18 @@ cd ../frontend
 npm install
 ```
 
-### 6. Executar seeder (opcional)
+### 5. Executar seeder (opcional)
 
 El projecte compta amb dades de prova per testejar el funcionament del frontend, per carregar-les simplement has d'executar la següent comanda:
 
 ```bash
+cd ../yakuza_like_a_dragon_api
 npm run seed
 ```
 
 **Nota:** Per evitar duplicitat o més errors, els seeders només funcionaran si la base de dades està buida.
 
-### 7. Executar l'aplicació
+### 6. Executar l'aplicació
 
 En una terminal, desde la carpeta `yakuza_like_a_dragon_api/`:
 
@@ -360,8 +350,6 @@ O amb clau SSH:
 git clone git@github.com:aaroncano2006/yakuza_like_a_dragon_api.git
 ```
 
-**Nota:** Alguns fitxers ja venen configurats per defecte per a ser compatibles amb Docker. De totes maneres, és recomanable seguir els pasos per evitar errors de configuració.
-
 ### 2. Configurar variables d'entorn (Backend)
 
 Situa't a `yakuza_like_a_dragon_api`:
@@ -388,18 +376,7 @@ PORT=3001
 
 És important que el host de MongoDB sigui l'indicat anteriorment, ja que d'aquest forma l'API podrà reconéixer el contenidor dins de la xarxa Docker i fer les peticions. Indicant `localhost` i el port al que apunta el MongoDB local ens donarà error.
 
-### 3. Canviar origen del frontend a `index.js`
-
-Modifiquem el següent fragment del fitxer:
-
-```javascript
-//const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:5173"]; // For dev
-const allowedOrigins = [process.env.CORS_ORIGIN, "http://localhost:8080"]; // For Docker
-```
-
-D'aquesta forma les peticions des de la maetixa API i el frontend seràn admesses.
-
-### 4. Crear `.env` a l'arrel del projecte
+### 3. Crear `.env` a l'arrel del projecte
 
 Ens situem a l'arrel del projecte:
 
@@ -417,7 +394,7 @@ cp .env.example
 MONGO_PORT=27017 # (Pot ser un altre port disponible, o deixar-ho buit per agafar el 27017 per defecte)
 ```
 
-### 5. Executar Docker Compose
+### 4. Executar Docker Compose
 
 ```bash
 docker compose up --build -d
@@ -432,6 +409,8 @@ Aixecarà 3 contenidors:
 Accedim al frontend des de [`localhost:8080`](http://localhost:8080):
 
 ![alt text](readme_src/04.png)
+
+**Nota:** A l'executar l'aplicació amb Docker s'executen automàticament un seeders amb dades de prova, no fa falta executar-los manualment a diferència de la instal·lació en local.
 
 Accedim a [`localhost:3001`](http://localhost:3001) per veure el healthcheck i a [`localhost:3001/api-docs`](http://localhost:3001/api-docs) per consultar la documentació de l'API i provar els endpoints:
 
@@ -449,37 +428,115 @@ Accedim a [`localhost:3001`](http://localhost:3001) per veure el healthcheck i a
 
 ### ➕ Afegir element
 
-Clicant el botó **Afegir Personatge** o **Afegir Item** obrirem una finestra Modal amb el formulari de creació:
+Clicant el botó **Afegir Main Character** o **Afegir Sujimon** obrirem una finestra Modal amb el formulari de creació:
 
-Els camps obligatoris i validacions són els següents:
+![alt text](readme_src/07.png)
 
-- **ID**: Enter, positiu i únic. El formulari ja posa una ID per defecte.
-- **Nom**: Longitud mínima de 3 caràcters.
-- **Descripció**: Longitud mínima de 10 caràcters.
-- **URL d'Imatge**: Només accepta URLs vàlides.
-- **Altres camps**: Segons el tipus d'element (personatges, items, etc.)
+![alt text](readme_src/08.png)
+
+Els camps obligatoris i validacions per Main Character són els següent:
+
+- **Nom**: Obligatori. Mínim un caràcter, no pot estar buit.
+
+- **Data de naixement**: Opcional. Format de data vàlid (per exemple: dd/mm/YYYY).
+
+- **Treballs**: Opcional. Text separat per "," (exemple: _Heroe,Freelancer_), internament es fa la conversió a array.
+
+- **Imatge**: Opcional. URL vàlida.
+
+- **Descripció**: Opcional.
+
+- **És jugable**: Marca la checkbox en funció de si el personatge és jugable o no, en cas de no marcar-la l'aplicació desarà el personatge com a no jugable.
 
 Si es crea correctament veurem una alerta indicant-ho.
+
+![alt text](readme_src/09.png)
+
+![alt text](readme_src/10.png)
+
+Els camps obligatoris i validacions per Sujimon són els següents:
+
+- **Nom**: Obligatori. Mínim un caràcter, no pot estar buit.
+
+- **ID**: Obligatori. ID numèrica que correspon amb la seva entrada a la Sujidex del videojoc Yakuza Like a Dragon.
+
+- **Categoria**: Obligatori. Mínim un caràcter.
+
+- **Ubicacions comuns**: Obligatori. Text separat per "," (per exemple: _Isezaki Ijincho,Kamurocho_), internament es fa la conversió a array.
+
+- **Raresa**: Obligatori. Número sencer entre 1 i 5.
+
+- **Habilitats**: Obligatori. Text separat per "," (per exemple: _Bayoneta Fantasma,Golpear_), internament es fa la conversió a array.
+
+- **Debilitats**: Obligatori. Text separat per "," (per exemple: _Fuego,Cortante_), internament es fa la conversió a array.
+
+- **Drops**: Obligatori. Text separat per "," (per exemple: _Piedra misteriosa,Rubí en bruto_), internament es fa la conversió a array.
+
+- **Imatge**: Opcional. URL vàlida.
+
+- **Descripció**: Opcional.
+
+Si es crea correctament veurem una alerta indicant-ho.
+
+![alt text](readme_src/11.png)
 
 <a id="-mostrar-detall-de-lelement"></a>
 
 ### 👁️ Mostrar detall de l'element
 
-Clicant al **botó de detall** podem visualitzar en una finestra Modal tota la informació de l'element seleccionat amb tots els seus camps.
+Clicant al **botó de detall (icona de l'ull)** podem visualitzar en una finestra Modal tota la informació de l'element seleccionat amb tots els seus camps.
+
+**Detall de Main Character:**
+
+![alt text](readme_src/12.png)
+
+**Detall de Sujimon:**
+
+![alt text](readme_src/13.png)
 
 <a id="-editar-element"></a>
 
 ### ✏️ Editar element
 
+Clicant al **botó d'editar (icona llapis)** podem editar l'element seleccionat seguint els **camps obligatoris i validacions** especificats a l'apartat [➕ Afegir Element](#-afegir-element).
+
+**Editar Main Character:**
+
+![alt text](readme_src/14.png)
+
+Si passa la validació, sortirà un missatge indicant que s'ha editat correctament:
+
+![alt text](readme_src/15.png)
+
+**Editar Sujimon:**
+
+![alt text](readme_src/16.png)
+
+D'igual forma, si tot surt bé veurem un missatge indicant-ho:
+
+![alt text](readme_src/17.png)
 
 <a id="-eliminar-element"></a>
 
 ### 🚮 Eliminar element
 
+Clicant al **botó d'eliminar (icona paperera)** podem eliminar un element.
+
+Abans d'eliminar-ho ens demanarà confirmar l'operació:
+
+![alt text](readme_src/18.png)
+
+Si tot surt bé, el personatge s'haurà eliminat del llistat i serem notificats:
+
+![alt text](readme_src/19.png)
 
 <a id="-canviar-llistat">
 
-### Canviar de llistat
+### 🔁 Canviar de llistat
+
+Clicant el botó de "Canviar de llistat" podem alternar entre els Main Characters i els Sujimon
+
+![alt text](readme_src/20.gif)
 
 ---
 
