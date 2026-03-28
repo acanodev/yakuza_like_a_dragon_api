@@ -2,69 +2,69 @@
 
 <a id="-index"></a>
 
-## 📑 Índex
+## 📑 Index
 
-- [🎯 Objectiu del projecte](#-objectiu-del-projecte)
-- [🛠️ Tech stack (Tecnologies utilitzades)](#️-tech-stack-tecnologies-utilitzades)
-- [📁 Estructura del projecte](#-estructura-del-projecte)
-- [👀 Requisits previs](#-requisits-previs)
-- [⚙️ Instal·lació (local)](#️-installació-local)
-- [🐳 Instal·lació (Docker)](#-installació-docker)
-- [⏩ Funcionalitats](#-funcionalitats)
-  - [➕ Afegir element](#-afegir-element)
-  - [👁️ Mostrar detall de l'element](#-mostrar-detall-de-lelement)
-  - [✏️ Editar element](#-editar-element)
-  - [🚮 Eliminar element](#-eliminar-element)
-  - [🔁 Canviar de llista](#-canviar-de-llistat)
-- [🔌 Endpoints de l'API](#-endpoints-de-lapi)
-- [👤 Autor](#-autor)
-
----
-
-<a id="-objectiu-del-projecte"></a>
-
-## 🎯 Objectiu del projecte
-
-L'objectiu d'aquest projecte és crear una aplicació full stack uilitzant el **MERN Stack** (MongoDB, Express, React, Node.js).
-
-L'aplicació ha de realitzar **diverses operacions CRUD** (Create, Read, Update, Delete) a través d'una API RESTful i proporcionar un frontend intuitiu per a realitzar-les.
-
-L'aplicació ha de comptar amb les següent funcionalitats:
-
-- Llistar elements
-- Crear elements
-- Editar elements
-- Eliminar elements
-- Mostrar detall dels elements
-- Gestionar base de dades amb MongoDB
+- [🎯 Project Objective](#-project-objective)
+- [🛠️ Tech stack (Technologies Used)](#️-tech-stack-technologies-used)
+- [📁 Project Structure](#-project-structure)
+- [👀 Prerequisites](#-prerequisites)
+- [⚙️ Installation (Local)](#️-installation-local)
+- [🐳 Installation (Docker)](#-installation-docker)
+- [⏩ Features](#-features)
+  - [➕ Add Element](#-add-element)
+  - [👁️ Show Element Details](#-show-element-details)
+  - [✏️ Edit Element](#-edit-element)
+  - [🚮 Delete Element](#-delete-element)
+  - [🔁 Switch List](#-switch-list)
+- [🔌 API Endpoints](#-api-endpoints)
+- [👤 Author](#-author)
 
 ---
 
-<a id="️-tech-stack-tecnologies-utilitzades"></a>
+<a id="-project-objective"></a>
 
-## 🛠️ Tech stack (Tecnologies utilitzades)
+## 🎯 Project Objective
+
+The objective of this project is to create a full-stack application using the **MERN Stack** (MongoDB, Express, React, Node.js).
+
+The application must perform **various CRUD operations** (Create, Read, Update, Delete) through a RESTful API and provide an intuitive frontend to perform them.
+
+The application must have the following features:
+
+- List elements
+- Create elements
+- Edit elements
+- Delete elements
+- Show element details
+- Manage database with MongoDB
+
+---
+
+<a id="️-tech-stack-technologies-used"></a>
+
+## 🛠️ Tech stack (Technologies Used)
 
 - **Runtime:** Node.js
-- **Backend (API RESTful):** Express.js
-- **Base de dades:** MongoDB
-- **Gestió d'errors:** Middleware personalitzat
-- **CORS:** Configuració per a peticions creuades
+- **Backend (RESTful API):** Express.js
+- **Database:** MongoDB
+- **Error Handling:** Custom Middleware
+- **CORS:** Configuration for cross-origin requests
 - **API-DOCS**: Swagger
 - **Frontend:** React (TypeScript)
 - **Styles:** CSS + Bootstrap
-- **Icones:** Font Awesome
-- **Fonts utilitzades:** [Edo SZ](https://www.dafont.com/edo-sz.font?text=Mysterious+Hitman), [Noto Sans Display](https://fonts.google.com/download/next-steps?categoryFilters=Feeling:%2FExpressive%2FBusiness)
-- **Gestió de formularis:** React Hook Form
-- **Validacions:** Zod (frontend), Mongoose + validadors personalitzats (backend)
-- **Peticions asíncrones:** Axios
-- **Contenidor:** Docker
-- **Imatges de Docker:** [Node:22 Alpine](https://hub.docker.com/layers/library/node/22-alpine/images/sha256-3a4802e64ab5181c7870d6ddd8c824c2efc42873baae37d1971451668659483b), [Nginx:1.29.6 Alpine](https://hub.docker.com/_/nginx/) i [MongoDB 8.0](https://hub.docker.com/_/mongo)
+- **Icons:** Font Awesome
+- **Fonts Used:** [Edo SZ](https://www.dafont.com/edo-sz.font?text=Mysterious+Hitman), [Noto Sans Display](https://fonts.google.com/download/next-steps?categoryFilters=Feeling:%2FExpressive%2FBusiness)
+- **Form Management:** React Hook Form
+- **Validations:** Zod (frontend), Mongoose + custom validators (backend)
+- **Asynchronous Requests:** Axios
+- **Container:** Docker
+- **Docker Images:** [Node:22 Alpine](https://hub.docker.com/layers/library/node/22-alpine/images/sha256-3a4802e64ab5181c7870d6ddd8c824c2efc42873baae37d1971451668659483b), [Nginx:1.29.6 Alpine](https://hub.docker.com/_/nginx/) and [MongoDB 8.0](https://hub.docker.com/_/mongo)
 
 ---
 
-<a id="-estructura-del-projecte"></a>
+<a id="-project-structure"></a>
 
-## 📁 Estructura del projecte
+## 📁 Project Structure
 
 ```
 /
@@ -165,40 +165,40 @@ L'aplicació ha de comptar amb les següent funcionalitats:
 
 ```
 
-**Nota**: En el projecte del repositori falten directoris com per exemple `node_modules`, essencials per al funcionament de l'aplicació, més endavant seguint els passos de la instal·lació es poden restaurar.
+**Note**: The project repository is missing directories such as `node_modules`, which are essential for the application to function. Later, following the installation steps, they can be restored.
 
 ---
 
-<a id="-requisits-previs"></a>
+<a id="-prerequisites"></a>
 
-## 👀 Requisits previs
+## 👀 Prerequisites
 
 - **[Node JS 22.21.1](https://nodejs.org/en/download)**
 - **[Git](https://git-scm.com/install/)**
-- **[Docker Engine (si es vol utilitzar des de un contenidor)](https://docs.docker.com/engine/install/)**
+- **[Docker Engine (if you want to use it from a container)](https://docs.docker.com/engine/install/)**
 - **[MongoDB](https://www.mongodb.com/try/download/community-kubernetes-operator)**
 
-**Nota 1**: És possible que si treballes des de una distribució Linux ja tinguis Git instal·lat, pots comprovar-ho amb la següent comanda:
+**Note 1**: It is possible that if you work from a Linux distribution you already have Git installed, you can check it with the following command:
 
 ```bash
 git --version
 ```
 
-La sortida hauria de ser similar a la següent:
+The output should be similar to the following:
 
 ```bash
 git version 2.43.0
 ```
 
-**Nota 2**: Per agilitzar la preparació de MongoDB i la base de dades si es vol instal·lar i utilitzar en local, el projecte disposa d'un directori `mongodb` amb un fitxer `.env.example` i `compose.yaml` per aixecar un contenidor Docker amb MongoDB i no haver de fer cap configuració extra, per fer-ho segueix els **següents passos:**
+**Note 2**: To speed up the preparation of MongoDB and the database if you want to install and use it locally, the project has a `mongodb` directory with a `.env.example` file and `compose.yaml` to launch a Docker container with MongoDB without any extra configuration. To do this, follow the **following steps:**
 
-**Pas 1:** Una vegada tinguis el repositori clonat (consulta [el primer pas de **⚙️ Instal·lació (Local)**](#️-installació-local) per saber com fer-ho), partint de l'arrel del projecte ubica't al directori `mongodb`:
+**Step 1:** Once you have the repository cloned (see [the first step of **⚙️ Installation (Local)**](#️-installation-local) to know how to do it), starting from the project root, navigate to the `mongodb` directory:
 
 ```bash
 cd mongodb
 ```
 
-**Pas 2:** Comprova que tens el port **27017** lliure:
+**Step 2:** Check that you have port **27017** available:
 
 ```bash
 aaroncanofdez@aaron-cano-disk:~$ ss -punta | grep 27017
@@ -207,29 +207,29 @@ tcp   ESTAB     0      0                172.23.0.1:39594     172.23.0.2:27017
 tcp   ESTAB     0      0                172.23.0.1:39600     172.23.0.2:27017
 ```
 
-Si `Local Address:Port` no té:
+If `Local Address:Port` does not show:
 
 ```bash
 127.0.0.1:27017
 ```
 
-El port està lliure i no has de configurar res més, ja que Docker Compose al crear el contenidor de MongoDB ja agafa el port 27017 per defecte. Si surt hauràs de fer una còpia de `.env.example` per crear un fitxer `.env` i especificar un port que tinguis lliure:
+The port is available and you don't need to configure anything else, as Docker Compose will automatically use port 27017 when creating the MongoDB container. If it does show, you'll need to make a copy of `.env.example` to create a `.env` file and specify an available port:
 
 ```bash
-cp .env.example
+cp .env.example .env
 ```
 
 ```env
-MONGO_PORT=(PORT QUE TINGUIS LLIURE o buit per utilitzar el 27017)
+MONGO_PORT=(PORT YOU HAVE AVAILABLE or leave empty to use 27017)
 ```
 
-Ara només queda aixecar el contenidor:
+Now you just need to start the container:
 
 ```bash
 docker compose up --build -d
 ```
 
-I veurem que està actiu:
+And you'll see that it's active:
 
 ```bash
 docker ps
@@ -242,81 +242,81 @@ CONTAINER ID   IMAGE                 COMMAND                  CREATED          S
 
 ---
 
-<a id="️-installacio-local"></a>
+<a id="️-installation-local"></a>
 
-## ⚙️ Instal·lació (local)
+## ⚙️ Installation (Local)
 
-### 1. Clonar el repositori
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/aaroncano2006/yakuza_like_a_dragon_api.git
 ```
 
-O amb clau SSH:
+Or with SSH key:
 
 ```bash
 git clone git@github.com:aaroncano2006/yakuza_like_a_dragon_api.git
 ```
 
-### 2. Instal·lar dependències del Backend
+### 2. Install Backend Dependencies
 
 ```bash
 cd yakuza_like_a_dragon_api
 npm install
 ```
 
-### 3. Configurar variables d'entorn (Backend)
+### 3. Configure Environment Variables (Backend)
 
-Còpia el fitxer `.env.example` amb el nom `.env`
+Copy the `.env.example` file with the name `.env`
 
 ```env
 cp .env.example .env
 ```
 
-Omple les variables d'entorn per a execució local:
+Fill in the environment variables for local execution:
 
 ```env
-MONGODB_URI=mongodb://localhost:(port de MongoDB, per defecte: 27017)/db
+MONGODB_URI=mongodb://localhost:(MongoDB port, default: 27017)/db
 CORS_ORIGIN=http://localhost:3001
 HOST=http://localhost
 PORT=3001
 ```
 
-### 4. Instal·lar dependències del Frontend
+### 4. Install Frontend Dependencies
 
-Ens situem al directori `frontend`
+Navigate to the `frontend` directory
 
 ```bash
 cd ../frontend
 npm install
 ```
 
-### 5. Executar seeder (opcional)
+### 5. Run Seeder (Optional)
 
-El projecte compta amb dades de prova per testejar el funcionament del frontend, per carregar-les simplement has d'executar la següent comanda:
+The project has test data to test the frontend functionality. To load it, simply run the following command:
 
 ```bash
 cd ../yakuza_like_a_dragon_api
 npm run seed
 ```
 
-**Nota:** Per evitar duplicitat o més errors, els seeders només funcionaran si la base de dades està buida.
+**Note:** To avoid duplication or further errors, seeders will only work if the database is empty.
 
-### 6. Executar l'aplicació
+### 6. Run the Application
 
-En una terminal, desde la carpeta `yakuza_like_a_dragon_api/`:
-
-```bash
-npm run dev
-```
-
-En una altra terminal, desde la carpeta `frontend/`:
+In one terminal, from the `yakuza_like_a_dragon_api/` folder:
 
 ```bash
 npm run dev
 ```
 
-Accedim a la URL que ens doni la sortida de Vite (normalment [`http://localhost:5173`](http://localhost:5173)):
+In another terminal, from the `frontend/` folder:
+
+```bash
+npm run dev
+```
+
+Access the URL provided by Vite output (usually [`http://localhost:5173`](http://localhost:5173)):
 
 ```
 VITE v5.x.x  ready in XXX ms
@@ -327,7 +327,7 @@ VITE v5.x.x  ready in XXX ms
 
 ![alt text](readme_src/01.png)
 
-Si accedim a [`localhost:3001`](http://localhost:3001) veurem un healthcheck detallat sobre l'API i a [`localhost:3001/api-docs`](http://localhost:3001/api-docs) per consultar la documentació de l'API i provar els endpoints:
+If you access [`localhost:3001`](http://localhost:3001) you will see a detailed healthcheck about the API and at [`localhost:3001/api-docs`](http://localhost:3001/api-docs) to consult the API documentation and try the endpoints:
 
 ![alt text](readme_src/02.png)
 
@@ -335,37 +335,37 @@ Si accedim a [`localhost:3001`](http://localhost:3001) veurem un healthcheck det
 
 ---
 
-<a id="-installacio-docker"></a>
+<a id="-installation-docker"></a>
 
-## 🐳 Instal·lació (Docker)
+## 🐳 Installation (Docker)
 
-### 1. Clonar el repositori
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/aaroncano2006/yakuza_like_a_dragon_api.git
 ```
 
-O amb clau SSH:
+Or with SSH key:
 
 ```bash
 git clone git@github.com:aaroncano2006/yakuza_like_a_dragon_api.git
 ```
 
-### 2. Configurar variables d'entorn (Backend)
+### 2. Configure Environment Variables (Backend)
 
-Situa't a `yakuza_like_a_dragon_api`:
+Navigate to `yakuza_like_a_dragon_api`:
 
 ```bash
 cd yakuza_like_a_dragon_api
 ```
 
-Còpia el fitxer `.env.example` amb el nom `.env`
+Copy the `.env.example` file with the name `.env`
 
 ```env
 cp .env.example .env
 ```
 
-Omple les variables d'entorn per a execució en Docker:
+Fill in the environment variables for Docker execution:
 
 ```env
 # FOR DOCKER
@@ -375,45 +375,45 @@ HOST=http://localhost
 PORT=3001
 ```
 
-És important que el host de MongoDB sigui l'indicat anteriorment, ja que d'aquest forma l'API podrà reconéixer el contenidor dins de la xarxa Docker i fer les peticions. Indicant `localhost` i el port al que apunta el MongoDB local ens donarà error.
+It is important that the MongoDB host is as indicated above, so that the API can recognize the container within the Docker network and make requests. Using `localhost` and the port that the local MongoDB points to will result in an error.
 
-### 3. Crear `.env` a l'arrel del projecte
+### 3. Create `.env` at the Project Root
 
-Ens situem a l'arrel del projecte:
+Navigate to the project root:
 
 ```bash
 cd ..
 ```
 
-Copiem el fitxer `.env.example` amb el nom `.env` i omplim la variable d'entorn amb el port de la nostra màquina que utilitzarà
+Copy the `.env.example` file with the name `.env` and fill in the environment variable with the port on your machine that will be used
 
 ```bash
-cp .env.example
+cp .env.example .env
 ```
 
 ```env
-MONGO_PORT=27017 # (Pot ser un altre port disponible, o deixar-ho buit per agafar el 27017 per defecte)
+MONGO_PORT=27017 # (Can be another available port, or leave it empty to use 27017 by default)
 ```
 
-### 4. Executar Docker Compose
+### 4. Run Docker Compose
 
 ```bash
 docker compose up --build -d
 ```
 
-Aixecarà 3 contenidors:
+This will bring up 3 containers:
 
 - MongoDB 8.0
-- API (sobre Node 22 Alpine)
-- Frontend (sobre Nginx)
+- API (on Node 22 Alpine)
+- Frontend (on Nginx)
 
-Accedim al frontend des de [`localhost:8080`](http://localhost:8080):
+Access the frontend from [`localhost:8080`](http://localhost:8080):
 
 ![alt text](readme_src/04.png)
 
-**Nota:** A l'executar l'aplicació amb Docker s'executen automàticament un seeders amb dades de prova, no fa falta executar-los manualment a diferència de la instal·lació en local.
+**Note:** When running the application with Docker, seeders with test data are automatically executed. You don't need to run them manually as opposed to the local installation.
 
-Accedim a [`localhost:3001`](http://localhost:3001) per veure el healthcheck i a [`localhost:3001/api-docs`](http://localhost:3001/api-docs) per consultar la documentació de l'API i provar els endpoints:
+Access [`localhost:3001`](http://localhost:3001) to see the healthcheck and [`localhost:3001/api-docs`](http://localhost:3001/api-docs) to consult the API documentation and try the endpoints:
 
 ![alt text](readme_src/05.png)
 
@@ -421,147 +421,149 @@ Accedim a [`localhost:3001`](http://localhost:3001) per veure el healthcheck i a
 
 ---
 
-<a id="-funcionalitats"></a>
+<a id="-features"></a>
 
-## ⏩ Funcionalitats
+## ⏩ Features
 
-<a id="-afegir-element"></a>
+<a id="-add-element"></a>
 
-### ➕ Afegir element
+### ➕ Add Element
 
-Clicant el botó **Afegir Main Character** o **Afegir Sujimon** obrirem una finestra Modal amb el formulari de creació:
+By clicking the **Add Main Character** or **Add Sujimon** button, we open a Modal window with the creation form:
 
 ![alt text](readme_src/07.png)
 
 ![alt text](readme_src/08.png)
 
-Els camps obligatoris i validacions per Main Character són els següent:
+The mandatory fields and validations for Main Character are as follows:
 
-- **Nom**: Obligatori. Mínim un caràcter, no pot estar buit.
+- **Name**: Mandatory. Minimum one character, cannot be empty.
 
-- **Data de naixement**: Opcional. Format de data vàlid (per exemple: dd/mm/YYYY).
+- **Date of Birth**: Optional. Valid date format (for example: dd/mm/YYYY).
 
-- **Treballs**: Opcional. Text separat per "," (exemple: _Heroe,Freelancer_), internament es fa la conversió a array.
+- **Jobs**: Optional. Text separated by "," (example: _Hero,Freelancer_), internally converted to array.
 
-- **Imatge**: Opcional. URL vàlida.
+- **Image**: Optional. Valid URL.
 
-- **Descripció**: Opcional.
+- **Description**: Optional.
 
-- **És jugable**: Marca la checkbox en funció de si el personatge és jugable o no, en cas de no marcar-la l'aplicació desarà el personatge com a no jugable.
+- **Is Playable**: Check the checkbox depending on whether the character is playable or not. If you don't check it, the application will save the character as non-playable.
 
-Si es crea correctament veurem una alerta indicant-ho.
+If created correctly, you will see an alert indicating so.
 
 ![alt text](readme_src/09.png)
 
 ![alt text](readme_src/10.png)
 
-Els camps obligatoris i validacions per Sujimon són els següents:
+The mandatory fields and validations for Sujimon are as follows:
 
-- **Nom**: Obligatori. Mínim un caràcter, no pot estar buit.
+- **Name**: Mandatory. Minimum one character, cannot be empty.
 
-- **ID**: Obligatori. ID numèrica que correspon amb la seva entrada a la Sujidex del videojoc Yakuza Like a Dragon.
+- **ID**: Mandatory. Numeric ID that corresponds to its entry in the Sujidex of the Yakuza Like a Dragon video game.
 
-- **Categoria**: Obligatori. Mínim un caràcter.
+- **Category**: Mandatory. Minimum one character.
 
-- **Ubicacions comuns**: Obligatori. Text separat per "," (per exemple: _Isezaki Ijincho,Kamurocho_), internament es fa la conversió a array.
+- **Common Locations**: Mandatory. Text separated by "," (for example: _Isezaki Ijincho,Kamurocho_), internally converted to array.
 
-- **Raresa**: Obligatori. Número sencer entre 1 i 5.
+- **Rarity**: Mandatory. Integer number between 1 and 5.
 
-- **Habilitats**: Obligatori. Text separat per "," (per exemple: _Bayoneta Fantasma,Golpear_), internament es fa la conversió a array.
+- **Abilities**: Mandatory. Text separated by "," (for example: _Ghost Bayonet,Hit_), internally converted to array.
 
-- **Debilitats**: Obligatori. Text separat per "," (per exemple: _Fuego,Cortante_), internament es fa la conversió a array.
+- **Weaknesses**: Mandatory. Text separated by "," (for example: _Fire,Slashing_), internally converted to array.
 
-- **Drops**: Obligatori. Text separat per "," (per exemple: _Piedra misteriosa,Rubí en bruto_), internament es fa la conversió a array.
+- **Drops**: Mandatory. Text separated by "," (for example: _Mysterious Stone,Raw Ruby_), internally converted to array.
 
-- **Imatge**: Opcional. URL vàlida.
+- **Image**: Optional. Valid URL.
 
-- **Descripció**: Opcional.
+- **Description**: Optional.
 
-Si es crea correctament veurem una alerta indicant-ho.
+If created correctly, you will see an alert indicating so.
 
 ![alt text](readme_src/11.png)
 
-<a id="-mostrar-detall-de-lelement"></a>
+<a id="-show-element-details"></a>
 
-### 👁️ Mostrar detall de l'element
+### 👁️ Show Element Details
 
-Clicant al **botó de detall (icona de l'ull)** podem visualitzar en una finestra Modal tota la informació de l'element seleccionat amb tots els seus camps.
+By clicking the **detail button (eye icon)** we can view in a Modal window all the information of the selected element with all its fields.
 
-**Detall de Main Character:**
+**Main Character Details:**
 
 ![alt text](readme_src/12.png)
 
-**Detall de Sujimon:**
+**Sujimon Details:**
 
 ![alt text](readme_src/13.png)
 
-<a id="-editar-element"></a>
+<a id="-edit-element"></a>
 
-### ✏️ Editar element
+### ✏️ Edit Element
 
-Clicant al **botó d'editar (icona llapis)** podem editar l'element seleccionat seguint els **camps obligatoris i validacions** especificats a l'apartat [➕ Afegir Element](#-afegir-element).
+By clicking the **edit button (pencil icon)** we can edit the selected element following the **mandatory fields and validations** specified in the section [➕ Add Element](#-add-element).
 
-**Editar Main Character:**
+**Edit Main Character:**
 
 ![alt text](readme_src/14.png)
 
-Si passa la validació, sortirà un missatge indicant que s'ha editat correctament:
+If it passes validation, a message will appear indicating that it has been edited correctly:
 
 ![alt text](readme_src/15.png)
 
-**Editar Sujimon:**
+**Edit Sujimon:**
 
 ![alt text](readme_src/16.png)
 
-D'igual forma, si tot surt bé veurem un missatge indicant-ho:
+Similarly, if everything goes well, you will see a message indicating so:
 
 ![alt text](readme_src/17.png)
 
-<a id="-eliminar-element"></a>
+<a id="-delete-element"></a>
 
-### 🚮 Eliminar element
+### 🚮 Delete Element
 
-Clicant al **botó d'eliminar (icona paperera)** podem eliminar un element.
+By clicking the **delete button (trash icon)** we can delete an element.
 
-Abans d'eliminar-ho ens demanarà confirmar l'operació:
+Before deleting, it will ask you to confirm the operation:
 
 ![alt text](readme_src/18.png)
 
-Si tot surt bé, el personatge s'haurà eliminat del llistat i serem notificats:
+If everything goes well, the character will be deleted from the list and you will be notified:
 
 ![alt text](readme_src/19.png)
 
-<a id="-canviar-llistat"></a>
+<a id="-switch-list"></a>
 
-### 🔁 Canviar de llistat
+### 🔁 Switch List
 
-Clicant el botó de "Canviar de llistat" podem alternar entre els Main Characters i els Sujimon
+By clicking the "Switch List" button, we can alternate between Main Characters and Sujimon
 
 ![alt text](readme_src/20.gif)
 
 ---
 
-<a id="-endpoints-de-lapi"></a>
+<a id="-api-endpoints"></a>
 
-## 🔌 Endpoints de l'API
+## 🔌 API Endpoints
 
-### 📌 Informació General
+### 📌 General Information
 
-Tots els endpoints estan prefixats amb `/api` i retornen respostes en format JSON.
+All endpoints are prefixed with `/api` and return responses in JSON format.
 
-- **URL Base (Local i Docker):** [`http://localhost:3001`](http://localhost:3001)
-- **Documentació Swagger:** [`/api-docs`](http://localhost:3001/api-docs)
+- **Base URL (Local and Docker):** [`http://localhost:3001`](http://localhost:3001)
+- **Swagger Documentation:** [`/api-docs`](http://localhost:3001/api-docs)
 
 ---
 
 ### Main Characters
-- GET /api/main_characters → Obtener todos
-- GET /api/main_characters/{id} → Obtener uno
-- POST /api/main_characters → Crear
-- PUT /api/main_characters/{id} → Actualizar
-- DELETE /api/main_characters/{id} → Eliminar
+
+- GET /api/main_characters → Get all
+- GET /api/main_characters/{id} → Get one
+- POST /api/main_characters → Create
+- PUT /api/main_characters/{id} → Update
+- DELETE /api/main_characters/{id} → Delete
 
 ### Sujimon
+
 - GET /api/sujimon
 - GET /api/sujimon/{id}
 - POST /api/sujimon
@@ -570,18 +572,18 @@ Tots els endpoints estan prefixats amb `/api` i retornen respostes en format JSO
 
 ---
 
-### Eines
+### Tools
 
 - [Postman](https://www.postman.com/)
 - [`curl`](https://curl.se/)
-- [Documentació Swagger](http://localhost:3001/api-docs) (integrada al repositori i especifica de l'API, **recomanda**)
+- [Swagger Documentation](http://localhost:3001/api-docs) (integrated into the repository and specific to the API, **recommended**)
 
 ---
 
-<a id="-autor"></a>
+<a id="-author"></a>
 
-## 👤 Autor
+## 👤 Author
 
 **Aarón Cano Fernández**  
-💻 2n de DAW  
-📍 Institut Carles Vallbona (Granollers, Barcelona, Espanya)
+💻 2nd Year of DAW (Web Application Development)  
+📍 Institut Carles Vallbona (Granollers, Barcelona, Spain)
