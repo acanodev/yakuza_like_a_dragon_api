@@ -1,6 +1,6 @@
 const sujimon = require("../models/Sujimon");
 
-module.exports = async (data, idToIgnore) => {
+module.exports = async (request, data, idToIgnore) => {
 
   let idNumToIgnore = null;
 
@@ -18,17 +18,16 @@ module.exports = async (data, idToIgnore) => {
     .filter((el) => el.id_num !== idNumToIgnore)
     .map((el) => el.id_num);
 
-
   if (!data.name || typeof data.name !== "string" || data.name.trim() === "") {
-    return "Name must be a string and not empty";
+    return request.__("validate_sujimon_name");
   }
 
   if (isNaN(data.id_num) || data.id_num < 1) {
-    return "id_num must be a number greater than 0";
+    return request.__("validate_sujimon_id_num_gt_0");
   }
 
   if (ids_num.includes(Number(data.id_num))) {
-    return "id_num must be unique";
+    return request.__("validate_sujimon_id_num_unique");
   }
 
   if (
@@ -36,11 +35,11 @@ module.exports = async (data, idToIgnore) => {
     typeof data.category !== "string" ||
     data.category.trim() === ""
   ) {
-    return "Category must be a string and not empty";
+    return request.__("validate_sujimon_category");
   }
 
   if (isNaN(data.rarity) || data.rarity < 1 || data.rarity > 5) {
-    return "Rarity must be a number between 1 and 5";
+    return request.__("validate_sujimon_rarity");
   }
 
   if (
@@ -48,7 +47,7 @@ module.exports = async (data, idToIgnore) => {
     typeof data.common_locations !== "string" ||
     data.common_locations.trim() === ""
   ) {
-    return "Common locations must be a string and not empty";
+    return request.__("validate_sujimon_common_locations");
   }
 
   if (
@@ -56,7 +55,7 @@ module.exports = async (data, idToIgnore) => {
     typeof data.skills !== "string" ||
     data.skills.trim() === ""
   ) {
-    return "Skills must be a string and not empty";
+    return request.__("validate_sujimon_skills");
   }
 
   if (
@@ -64,26 +63,26 @@ module.exports = async (data, idToIgnore) => {
     typeof data.weaknesses !== "string" ||
     data.weaknesses.trim() === ""
   ) {
-    return "Weaknesses must be a string and not empty";
+    return request.__("validate_sujimon_weaknesses");
   }
 
   if (
     data.drops &&
     (typeof data.drops !== "string" || data.drops.trim() === "")
   ) {
-    return "Drops must be a string or undefined";
+    return request.__("validate_sujimon_drops");
   }
 
   if (data.image && typeof data.image === "string") {
     try {
       new URL(data.image);
     } catch {
-      return "Invalid URL";
+      return request.__("validate_sujimon_image");
     }
   }
 
   if (data.description && typeof data.description !== "string") {
-    return "Description must be a string";
+    return request.__("validate_sujimon_description");
   }
 
   return null;
