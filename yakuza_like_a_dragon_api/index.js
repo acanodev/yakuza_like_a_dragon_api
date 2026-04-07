@@ -4,7 +4,7 @@ require("./mongo");
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const helmet = require("helmet"); // MIDDLEWARE DE SEGURETAT
+const helmet = require("helmet"); // SECURITY MIDDLEWARE
 
 const mainCharacter = require("./models/Main_Character");
 const Sujimon = require("./models/Sujimon");
@@ -18,9 +18,8 @@ const swaggerJsdoc = require("swagger-jsdoc");
 
 /*
 
-Helmet és un middleware de seguretat que afegeix capceleres de
-seguretat automàticament i serveix principalment per a protegir l'API de vulnerabilitats comuns
-dels navegadors web.
+Helmet is a security middleware that adds security headers automatically.
+It's used to avoid common browser vulnerabilites.
 
 */
 app.use(helmet());
