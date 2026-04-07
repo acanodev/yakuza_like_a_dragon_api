@@ -1,3 +1,5 @@
 {
-    "not_found": "No s'ha trobat l'endpoint o entrada a la qual vols accedir."
+    "not_found": "No s'ha trobat l'endpoint o entrada a la qual vols accedir.",
+    "not_allowed_by_cors": "CORS rebutja aquesta petició",
+    "internal_server_error": "Error del servidor"
 }

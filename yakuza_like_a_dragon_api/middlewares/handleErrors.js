@@ -6,7 +6,7 @@ function handleErrors(err, req, res, next) {
 
   res.status(status).json({
     success: false,
-    message: err.message || "Internal Server Error"
+    message: err.message || req.__("internal_server_error")
   });
 
 }

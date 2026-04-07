@@ -1,3 +1,5 @@
 {
-    "not_found": "unknown endpoint/entry"
+    "not_found": "unknown endpoint/entry",
+    "not_allowed_by_cors": "Not allowed by CORS",
+    "internal_server_error": "Internal Server Error"
 }
