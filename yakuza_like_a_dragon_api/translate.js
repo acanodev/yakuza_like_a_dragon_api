@@ -9,6 +9,8 @@ translator.configure({
   extension: ".json",
   queryParameter: "lang",
   cookie: "lang",
+  autoReload: true,
+  syncFiles: false,
 });
 
 module.exports = translator;
