@@ -1,5 +1,11 @@
 {
     "not_found": "No s'ha trobat l'endpoint o entrada a la qual vols accedir.",
     "not_allowed_by_cors": "CORS rebutja aquesta petició",
-    "internal_server_error": "Error del servidor"
+    "internal_server_error": "Error del servidor",
+    "validate_mc_name": "El nom ha de ser un text i no pot estar buit",
+    "validate_mc_jobs": "Els treballs del personatge han de ser enviats com a text o buits (undefined)",
+    "validate_mc_image": "La URL no és vàlida",
+    "validate_mc_description": "La descripció ha de ser un text",
+    "validate_mc_birth_date": "Data de naixement mal formatada",
+    "validate_mc_is_playable": "isPlayable ha de ser un boolean"
 }

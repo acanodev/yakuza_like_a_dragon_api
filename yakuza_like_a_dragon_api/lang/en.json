@@ -1,5 +1,11 @@
 {
     "not_found": "unknown endpoint/entry",
     "not_allowed_by_cors": "Not allowed by CORS",
-    "internal_server_error": "Internal Server Error"
+    "internal_server_error": "Internal Server Error",
+    "validate_mc_name": "Name must be a string and not empty",
+    "validate_mc_jobs": "Jobs must be sended as string or undefined",
+    "validate_mc_image": "Invalid URL",
+    "validate_mc_description": "Description must be a string",
+    "validate_mc_birth_date": "Invalid birth_date format",
+    "validate_mc_is_playable": "isPlayable must be a boolean"
 }

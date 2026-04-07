@@ -1,5 +1,11 @@
 {
     "not_found": "No se ha encontrado el endpoint o entrada a la que quieres acceder.",
     "not_allowed_by_cors": "CORS rechaza esta petición",
-    "internal_server_error": "Error del servidor"
+    "internal_server_error": "Error del servidor",
+    "validate_mc_name": "El nombre tiene que ser un texto y no puede estar vacio.",
+    "validate_mc_jobs": "Los trabajos del personaje deben ser enviados como texto o vacios (undefined)",
+    "validate_mc_image": "La URL enviada no es válida",
+    "validate_mc_description": "La descripción debe ser un texto",
+    "validate_mc_birth_date": "Fecha de nacimiento mal formatada",
+    "validate_mc_is_playable": "isPlayable tiene que ser boolean"
 }
