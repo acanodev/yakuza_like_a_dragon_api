@@ -8,6 +8,10 @@ const helmet = require("helmet"); // SECURITY MIDDLEWARE
 
 const mainCharacter = require("./models/Main_Character");
 const Sujimon = require("./models/Sujimon");
+const translator = require("./translate");
+
+app.use(translator.init);
+
 const handleErrors = require("./middlewares/handleErrors");
 const notFound = require("./middlewares/notFound");
 const validateMainCharacter = require("./validators/validateMainCharacter");

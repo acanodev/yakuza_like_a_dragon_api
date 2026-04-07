@@ -1,6 +1,6 @@
 module.exports = (request, response, next) => {
   response.status(404).json({
     ok: false,
-    error: "unknown endpoint/entry",
+    error: request.__('not_found'),
   });
 };
