@@ -12,7 +12,7 @@
   "validate_sujimon_id_num_gt_0": "id_num ha de ser un número més gran que 0",
   "validate_sujimon_id_num_unique": "id_num ha de ser únic",
   "validate_sujimon_category": "La categoria ha de ser una cadena de text i no pot estar buida",
-  "validate_sujimon_rariry": "La raresa ha de ser un número entre 1 i 5",
+  "validate_sujimon_rarity": "La raresa ha de ser un número entre 1 i 5",
   "validate_sujimon_common_locations": "Les ubicacions comunes han de ser una cadena de text i no poden estar buides",
   "validate_sujimon_skills": "Les habilitats han de ser una cadena de text i no poden estar buides",
   "validate_sujimon_weaknesses": "Les debilitats han de ser una cadena de text i no poden estar buides",

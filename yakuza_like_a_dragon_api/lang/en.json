@@ -12,7 +12,7 @@
   "validate_sujimon_id_num_gt_0": "id_num must be a number greater than 0",
   "validate_sujimon_id_num_unique": "id_num must be unique",
   "validate_sujimon_category": "Category must be a string and not empty",
-  "validate_sujimon_rariry": "Rarity must be a number between 1 and 5",
+  "validate_sujimon_rarity": "Rarity must be a number between 1 and 5",
   "validate_sujimon_common_locations": "Common locations must be a string and not empty",
   "validate_sujimon_skills": "Skills must be a string and not empty",
   "validate_sujimon_weaknesses": "Weaknesses must be a string and not empty",
